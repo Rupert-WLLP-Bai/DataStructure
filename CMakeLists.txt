@@ -7,7 +7,7 @@ project ("Data_Structure")
 
 # 包含子项目。
 add_subdirectory ("Q01")
-# add_subdirectory ("Q02")
+add_subdirectory ("Q02")
 # add_subdirectory ("Q03")
 # add_subdirectory ("Q04")
 # add_subdirectory ("Q05")
