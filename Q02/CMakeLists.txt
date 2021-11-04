@@ -10,5 +10,5 @@ include_directories(../templates)
 # 添加生成可执行文件
 add_executable(Q02 ${SRC_DIR_LIST})
 # 设置版本号
-set_target_properties(Q02 PROPERTIES VERSION 1.0.2)
+set_target_properties(Q02 PROPERTIES VERSION 1.0.3)
 
