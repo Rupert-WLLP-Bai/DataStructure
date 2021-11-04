@@ -2,15 +2,15 @@
 
 ## 使用
 ### Windows
-mkdir build
-cd build
-cmake .. -G "MinGW Makefiles"
+mkdir build \
+cd build \
+cmake .. -G "MinGW Makefiles" \
 mingw32-make
 
 ### Linux
-mkdir build
-cd build
-cmake .. -G "Unix Makefiles"
+mkdir build \
+cd build \
+cmake .. -G "Unix Makefiles" \
 make
 
 ## templates
