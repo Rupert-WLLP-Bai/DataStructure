@@ -23,13 +23,11 @@ v1.0.0 2021年10月26日16:35:17
 #include <cmath>
 #include <iomanip>
 #include <iostream>
-#include <vector>  //用于与std::sort进行比较
 
 //排序函数
 namespace sort_laobai {
 void swap(int& a, int& b);                                             //交换
 void assign(int* num, int* _arr, int N);                               //赋值
-void std_result(int* _arr);                                            //std::sort的结果
 void Bubble_sort(int* _arr);                                           //冒泡排序
 void Selection_sort(int* _arr);                                        //选择排序
 void Insertion_sort(int* _arr);                                        //插入排序
