@@ -18,9 +18,9 @@ v1.0.0 2021年10月26日16:35:17
 #include "stop_watch.h"  //Windows计时器
 #endif
 
-#include <stdlib.h>
 #include <algorithm>
 #include <cmath>
+#include <cstdlib>
 #include <iomanip>
 #include <iostream>
 

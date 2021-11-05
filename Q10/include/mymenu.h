@@ -31,7 +31,6 @@ void mainloop();
 //获取输入
 void get_input(int&, int, int, const char*);
 
-
 void print_menu() {
     cout << "**" << setw(15) << " "
          << "排序算法比较" << setw(15) << " "
@@ -67,8 +66,8 @@ void print_menu() {
 
 void input(int*& arr) {
     int num, range;
-    get_input(num, 0, INT32_MAX, "Input num of random numbers : ");
-    get_input(range, 1, INT32_MAX, "Input range of random numbers : ");
+    get_input(num, 0, INT32_MAX, "输入随机数的数量 : ");
+    get_input(range, 1, INT32_MAX, "输入随机数的上限 : ");
     arr = new int[num];
     generate(arr, num, range);
 }
@@ -123,7 +122,7 @@ void fetch_choice(int* arr) {
 }
 
 void mainloop() {
-    int* arr = nullptr; //需要初始化
+    int* arr = nullptr;  //需要初始化
     int i = 1;
     while (1) {
         if (i) {
