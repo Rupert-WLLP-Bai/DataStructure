@@ -16,7 +16,9 @@ v1.0.0 2021年10月19日17:41:13
 using namespace std;
 
 int main() {
+#ifdef _WIN32
+    system("chcp 65001");
+#endif
     mainloop();
     return 0;
 }
-
