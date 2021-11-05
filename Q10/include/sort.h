@@ -13,6 +13,7 @@ v1.0.0 2021年10月26日16:35:17
     TODO in v1.0.1
         1. rand的范围在Windows和Linux下不同
 */
+
 #ifdef _WIN32
 #include "stop_watch.h"  //Windows计时器
 #endif
@@ -101,7 +102,6 @@ void sort_laobai::assign(int* num, int* arr, int N) {
     }
 }
 
-
 //八种排序(10种)
 
 //1.冒泡排序
@@ -123,6 +123,9 @@ void sort_laobai::Bubble_sort(int* _arr) {
 #ifdef _WIN32
     stop_watch T;
     T.start();
+#else
+    timespec t1, t2;
+    clock_gettime(CLOCK_MONOTONIC, &t1);
 #endif
     //排序
     for (int i = 0; i < N - 1; i++) {
@@ -141,7 +144,15 @@ void sort_laobai::Bubble_sort(int* _arr) {
     cout << "Count :" << count << endl;
     //if (N < 100)
     //print_arr(arr);
-    cout << "--------------------------------------------------" << endl;
+    cout << "---------------------------------------------------" << endl;
+#else
+    clock_gettime(CLOCK_MONOTONIC, &t2);
+    int64_t deltaT = (t2.tv_sec - t1.tv_sec) * int64_t(pow(10, 9)) + t2.tv_nsec - t1.tv_nsec;
+    cout << "--------------------冒泡排序的结果-------------------" << endl;
+    cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
+    cout << "Count :" << count << endl;
+    //print_arr(arr);
+    cout << "-----------------------------------------------------" << endl;
 #endif
     //释放
     delete[] arr;
@@ -166,6 +177,9 @@ void sort_laobai::Selection_sort(int* _arr) {
 #ifdef _WIN32
     stop_watch T;
     T.start();
+#else
+    timespec t1, t2;
+    clock_gettime(CLOCK_MONOTONIC, &t1);
 #endif
     //排序
     for (int i = 0; i < N; i++) {
@@ -191,7 +205,15 @@ void sort_laobai::Selection_sort(int* _arr) {
     cout << "Count :" << count << endl;
     // if (N < 100)
     //print_arr(arr);
-    cout << "--------------------------------------------------" << endl;
+    cout << "---------------------------------------------------" << endl;
+#else
+    clock_gettime(CLOCK_MONOTONIC, &t2);
+    int64_t deltaT = (t2.tv_sec - t1.tv_sec) * int64_t(pow(10, 9)) + t2.tv_nsec - t1.tv_nsec;
+    cout << "--------------------选择排序的结果-------------------" << endl;
+    cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
+    cout << "Count :" << count << endl;
+    //print_arr(arr);
+    cout << "-----------------------------------------------------" << endl;
 #endif
     //释放
     delete[] arr;
@@ -215,6 +237,9 @@ void sort_laobai::Insertion_sort(int* _arr) {
 #ifdef _WIN32
     stop_watch T;
     T.start();
+#else
+    timespec t1, t2;
+    clock_gettime(CLOCK_MONOTONIC, &t1);
 #endif
     //排序
     for (int i = 1; i < N; i++) {
@@ -234,7 +259,15 @@ void sort_laobai::Insertion_sort(int* _arr) {
     cout << "Count :" << count << endl;
     //  if (N < 100)
     //   print_arr(arr);
-    cout << "--------------------------------------------------" << endl;
+    cout << "---------------------------------------------------" << endl;
+#else
+    clock_gettime(CLOCK_MONOTONIC, &t2);
+    int64_t deltaT = (t2.tv_sec - t1.tv_sec) * int64_t(pow(10, 9)) + t2.tv_nsec - t1.tv_nsec;
+    cout << "--------------------插入排序的结果-------------------" << endl;
+    cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
+    cout << "Count :" << count << endl;
+    //print_arr(arr);
+    cout << "-----------------------------------------------------" << endl;
 #endif
     //释放
     delete[] arr;
@@ -259,6 +292,9 @@ void sort_laobai::Shell_sort(int* _arr) {
 #ifdef _WIN32
     stop_watch T;
     T.start();
+#else
+    timespec t1, t2;
+    clock_gettime(CLOCK_MONOTONIC, &t1);
 #endif
     //排序
     int gap = N / 2;
@@ -278,7 +314,15 @@ void sort_laobai::Shell_sort(int* _arr) {
     cout << "Count :" << count << endl;
     // if (N < 100)
     //     print_arr(arr);
-    cout << "--------------------------------------------------" << endl;
+    cout << "---------------------------------------------------" << endl;
+#else
+    clock_gettime(CLOCK_MONOTONIC, &t2);
+    int64_t deltaT = (t2.tv_sec - t1.tv_sec) * int64_t(pow(10, 9)) + t2.tv_nsec - t1.tv_nsec;
+    cout << "--------------------希尔排序的结果-------------------" << endl;
+    cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
+    cout << "Count :" << count << endl;
+    //print_arr(arr);
+    cout << "-----------------------------------------------------" << endl;
 #endif
     //释放
     delete[] arr;
@@ -317,6 +361,9 @@ void sort_laobai::Quick_sort(int* _arr) {
 #ifdef _WIN32
     stop_watch T;
     T.start();
+#else
+    timespec t1, t2;
+    clock_gettime(CLOCK_MONOTONIC, &t1);
 #endif
     //排序
     count = Q_Sort(0, N - 1, arr);
@@ -328,7 +375,15 @@ void sort_laobai::Quick_sort(int* _arr) {
     cout << "Count :" << count << endl;
     //  if (N < 100)
     //     print_arr(arr);
-    cout << "--------------------------------------------------" << endl;
+    cout << "---------------------------------------------------" << endl;
+#else
+    clock_gettime(CLOCK_MONOTONIC, &t2);
+    int64_t deltaT = (t2.tv_sec - t1.tv_sec) * int64_t(pow(10, 9)) + t2.tv_nsec - t1.tv_nsec;
+    cout << "--------------------快速排序的结果-------------------" << endl;
+    cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
+    cout << "Count :" << count << endl;
+    //print_arr(arr);
+    cout << "----------------------------------------------------" << endl;
 #endif
     //释放
     delete[] arr;
@@ -378,6 +433,9 @@ void sort_laobai::Heap_sort(int* _arr) {
 #ifdef _WIN32
     stop_watch T;
     T.start();
+#else
+    timespec t1, t2;
+    clock_gettime(CLOCK_MONOTONIC, &t1);
 #endif
     //排序
     //1.构造大顶堆
@@ -396,7 +454,15 @@ void sort_laobai::Heap_sort(int* _arr) {
     cout << "Count :" << count << endl;
     //  if (N < 100)
     //      print_arr(arr);
-    cout << "--------------------------------------------------" << endl;
+    cout << "----------------------------------------------------" << endl;
+#else
+    clock_gettime(CLOCK_MONOTONIC, &t2);
+    int64_t deltaT = (t2.tv_sec - t1.tv_sec) * int64_t(pow(10, 9)) + t2.tv_nsec - t1.tv_nsec;
+    cout << "---------------------堆排序的结果--------------------" << endl;
+    cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
+    cout << "Count :" << count << endl;
+    //print_arr(arr);
+    cout << "-----------------------------------------------------" << endl;
 #endif
     //释放
     delete[] arr;
@@ -439,6 +505,9 @@ void sort_laobai::Merge_sort(int* _arr) {
 #ifdef _WIN32
     stop_watch T;
     T.start();
+#else
+    timespec t1, t2;
+    clock_gettime(CLOCK_MONOTONIC, &t1);
 #endif
     //排序
     MergeSort(arr, N, count);
@@ -450,7 +519,15 @@ void sort_laobai::Merge_sort(int* _arr) {
     cout << "Count :" << count << endl;
     //  if (N < 100)
     //      print_arr(arr);
-    cout << "----------------------------------------------------" << endl;
+    cout << "-----------------------------------------------------" << endl;
+#else
+    clock_gettime(CLOCK_MONOTONIC, &t2);
+    int64_t deltaT = (t2.tv_sec - t1.tv_sec) * int64_t(pow(10, 9)) + t2.tv_nsec - t1.tv_nsec;
+    cout << "--------------------归并排序的结果-------------------" << endl;
+    cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
+    cout << "Count :" << count << endl;
+    //print_arr(arr);
+    cout << "-----------------------------------------------------" << endl;
 #endif
     //释放
     delete[] arr;
@@ -526,16 +603,29 @@ void sort_laobai::Radix_sort(int* _arr) {
 #ifdef _WIN32
     stop_watch T;
     T.start();
+#else
+    timespec t1, t2;
+    clock_gettime(CLOCK_MONOTONIC, &t1);
+#endif
     //排序
     radixsort(arr, N);
     //计时结束
+#ifdef _WIN32
     T.stop();
     cout << "----------------------基数排序的结果-------------------" << endl;
     cout << "Time  :" << T.elapsed() << "  μs" << endl;
     cout << "Count :" << count << endl;
     //  if (N < 100)
     //      print_arr(arr);
-    cout << "--------------------------------------------------" << endl;
+    cout << "-----------------------------------------------------" << endl;
+#else
+    clock_gettime(CLOCK_MONOTONIC, &t2);
+    int64_t deltaT = (t2.tv_sec - t1.tv_sec) * int64_t(pow(10, 9)) + t2.tv_nsec - t1.tv_nsec;
+    cout << "--------------------基数排序的结果-------------------" << endl;
+    cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
+    cout << "Count :" << count << endl;
+    //print_arr(arr);
+    cout << "-----------------------------------------------------" << endl;
 #endif
     //释放
     delete[] arr;
@@ -582,4 +672,4 @@ int sort_laobai::max_bit(int* arr, int N) {
     return bit;
 }
 
-//22021年11月5日00:06:56
+//2021年11月5日10:30:26
