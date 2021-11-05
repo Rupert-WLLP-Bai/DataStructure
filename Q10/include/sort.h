@@ -1,20 +1,20 @@
 /*
 @file:        sort.h
-@description: ÅÅĞòº¯Êı
+@description: æ’åºå‡½æ•°
 @version:     v1.0.0
 @author:      Laobai
-@time:        2021Äê10ÔÂ26ÈÕ16:35:17
+@time:        2021å¹´10æœˆ26æ—¥16:35:17
 */
 
 /*
 update notes:
 
-v1.0.0 2021Äê10ÔÂ26ÈÕ16:35:17
+v1.0.0 2021å¹´10æœˆ26æ—¥16:35:17
     TODO in v1.0.1
-        1. randµÄ·¶Î§ÔÚWindowsºÍLinuxÏÂ²»Í¬
+        1. randçš„èŒƒå›´åœ¨Windowså’ŒLinuxä¸‹ä¸åŒ
 */
 #ifdef _WIN32
-#include "stop_watch.h"  //Windows¼ÆÊ±Æ÷
+#include "stop_watch.h"  //Windowsè®¡æ—¶å™¨
 #endif
 
 #include <stdlib.h>
@@ -22,44 +22,44 @@ v1.0.0 2021Äê10ÔÂ26ÈÕ16:35:17
 #include <cmath>
 #include <iomanip>
 #include <iostream>
-#include <vector>  //ÓÃÓÚÓëstd::sort½øĞĞ±È½Ï
+#include <vector>  //ç”¨äºä¸std::sortè¿›è¡Œæ¯”è¾ƒ
 
-//ÅÅĞòº¯Êı
+//æ’åºå‡½æ•°
 namespace sort_laobai {
-void swap(int& a, int& b);                                             //½»»»
-void assign(int* num, int* _arr, int N);                               //¸³Öµ
-void std_result(int* _arr);                                            //std::sortµÄ½á¹û
-void Bubble_sort(int* _arr);                                           //Ã°ÅİÅÅĞò
-void Selection_sort(int* _arr);                                        //Ñ¡ÔñÅÅĞò
-void Insertion_sort(int* _arr);                                        //²åÈëÅÅĞò
-void Shell_sort(int* _arr);                                            //Ï£¶ûÅÅĞò
-void Quick_sort(int* _arr);                                            //¿ìËÙÅÅĞò(»¹¿ÉÒÔÓÅ»¯)
-void Heap_sort(int* _arr);                                             //¶ÑÅÅĞò
-void Merge_sort(int* _arr);                                            //¹é²¢ÅÅĞò(¶şÂ·¹é²¢) (¿É¼ÓÈënÂ·¹é²¢)
-void Radix_sort(int* _arr);                                            //»ùÊıÅÅĞò
-int64_t Shell_insert(int* arr, int begin, int gap, int N);             //Ï£¶ûÅÅĞò²åÈë
-int64_t Q_Sort(int left, int right, int* arr);                         //¿ìËÙÅÅĞòµİ¹é
-int64_t adjustHeap(int* arr, int i, int n);                            //µ÷Õû¶Ñº¯Êı
-void MergeSort(int* A, int n, int64_t& count);                         //¹é²¢ÅÅĞò
-int64_t Merge(int* A, int* L, int leftCount, int* R, int rightCount);  //¹é²¢
-int max_bit(int* arr, int N);                                          //»ùÊıÅÅĞòÇó×î´óÎ»Êı
-void radixsort(int* data, int n);                                      //»ùÊıÅÅĞòÊµÏÖ
+void swap(int& a, int& b);                                             //äº¤æ¢
+void assign(int* num, int* _arr, int N);                               //èµ‹å€¼
+void std_result(int* _arr);                                            //std::sortçš„ç»“æœ
+void Bubble_sort(int* _arr);                                           //å†’æ³¡æ’åº
+void Selection_sort(int* _arr);                                        //é€‰æ‹©æ’åº
+void Insertion_sort(int* _arr);                                        //æ’å…¥æ’åº
+void Shell_sort(int* _arr);                                            //å¸Œå°”æ’åº
+void Quick_sort(int* _arr);                                            //å¿«é€Ÿæ’åº(è¿˜å¯ä»¥ä¼˜åŒ–)
+void Heap_sort(int* _arr);                                             //å †æ’åº
+void Merge_sort(int* _arr);                                            //å½’å¹¶æ’åº(äºŒè·¯å½’å¹¶) (å¯åŠ å…¥nè·¯å½’å¹¶)
+void Radix_sort(int* _arr);                                            //åŸºæ•°æ’åº
+int64_t Shell_insert(int* arr, int begin, int gap, int N);             //å¸Œå°”æ’åºæ’å…¥
+int64_t Q_Sort(int left, int right, int* arr);                         //å¿«é€Ÿæ’åºé€’å½’
+int64_t adjustHeap(int* arr, int i, int n);                            //è°ƒæ•´å †å‡½æ•°
+void MergeSort(int* A, int n, int64_t& count);                         //å½’å¹¶æ’åº
+int64_t Merge(int* A, int* L, int leftCount, int* R, int rightCount);  //å½’å¹¶
+int max_bit(int* arr, int N);                                          //åŸºæ•°æ’åºæ±‚æœ€å¤§ä½æ•°
+void radixsort(int* data, int n);                                      //åŸºæ•°æ’åºå®ç°
 }  // namespace sort_laobai
 
-//²âÊÔº¯Êı
+//æµ‹è¯•å‡½æ•°
 namespace test_sort {
-void print_arr(int* arr);                   //Êä³öÒ»¸ö*arr,·¶Î§¾ö¶¨¸ñÊ½»¯Êä³ö
-void generate(int* arr, int n, int range);  //Éú³ÉËæ»úµÄ*arr,ÊıÁ¿Îªn,·¶Î§Îª0~range-1
+void print_arr(int* arr);                   //è¾“å‡ºä¸€ä¸ª*arr,èŒƒå›´å†³å®šæ ¼å¼åŒ–è¾“å‡º
+void generate(int* arr, int n, int range);  //ç”Ÿæˆéšæœºçš„*arr,æ•°é‡ä¸ºn,èŒƒå›´ä¸º0~range-1
 
 }  // namespace test_sort
 
 using namespace std;
 using namespace test_sort;
 
-//Êä³öarr
+//è¾“å‡ºarr
 void test_sort::print_arr(int* arr) {
     using namespace sort_laobai;
-    //Ëã³ö*arrÖĞNµÄÖµ
+    //ç®—å‡º*arrä¸­Nçš„å€¼
     int* p = arr;
     int N = 0;
     while (*p != -1) {
@@ -76,7 +76,7 @@ void test_sort::print_arr(int* arr) {
     }
     cout << endl;
 }
-//Ëæ»úÉú³É(WindowsÏÂµÄRAND_MAXºÍLinuxÏÂ²»Í¬)
+//éšæœºç”Ÿæˆ(Windowsä¸‹çš„RAND_MAXå’ŒLinuxä¸‹ä¸åŒ)
 void test_sort::generate(int* arr, int n, int range) {
     srand((unsigned int)time(NULL));
     for (int i = 0; i < n; i++) {
@@ -87,14 +87,14 @@ void test_sort::generate(int* arr, int n, int range) {
         print_arr(arr);
 }
 
-//namespace sort_laobaiµÄÊµÏÖ Ö»¿¼ÂÇÕûÊıµÄsÊµÏÖ
-//½»»»
+//namespace sort_laobaiçš„å®ç° åªè€ƒè™‘æ•´æ•°çš„så®ç°
+//äº¤æ¢
 void sort_laobai::swap(int& a, int& b) {
     int temp = a;
     a = b;
     b = temp;
 }
-//¸³Öµ
+//èµ‹å€¼
 void sort_laobai::assign(int* num, int* arr, int N) {
     for (int i = 0; i < N; i++) {
         arr[i] = num[i];
@@ -102,29 +102,29 @@ void sort_laobai::assign(int* num, int* arr, int N) {
 }
 
 
-//°ËÖÖÅÅĞò(10ÖÖ)
+//å…«ç§æ’åº(10ç§)
 
-//1.Ã°ÅİÅÅĞò
+//1.å†’æ³¡æ’åº
 void sort_laobai::Bubble_sort(int* _arr) {
-    //Ëã³ö*arrÖĞNµÄÖµ
+    //ç®—å‡º*arrä¸­Nçš„å€¼
     int* p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
         p++;
     }
-    //¼ÆÊı
+    //è®¡æ•°
     int64_t count = 0;
-    //ÉêÇë
+    //ç”³è¯·
     int* arr = new int[N];
-    //¸³Öµ
+    //èµ‹å€¼
     sort_laobai::assign(_arr, arr, N);
-//¼ÆÊ±¿ªÊ¼
+//è®¡æ—¶å¼€å§‹
 #ifdef _WIN32
     stop_watch T;
     T.start();
 #endif
-    //ÅÅĞò
+    //æ’åº
     for (int i = 0; i < N - 1; i++) {
         for (int j = 0; j < N - 1; j++) {
             if (arr[j] > arr[j + 1]) {
@@ -133,41 +133,41 @@ void sort_laobai::Bubble_sort(int* _arr) {
             }
         }
     }
-//¼ÆÊ±½áÊø
+//è®¡æ—¶ç»“æŸ
 #ifdef _WIN32
     T.stop();
-    cout << "--------------------Ã°ÅİÅÅĞòµÄ½á¹û-------------------" << endl;
-    cout << "Time  :" << T.elapsed() << "  ¦Ìs" << endl;
+    cout << "--------------------å†’æ³¡æ’åºçš„ç»“æœ-------------------" << endl;
+    cout << "Time  :" << T.elapsed() << "  Î¼s" << endl;
     cout << "Count :" << count << endl;
     //if (N < 100)
     //print_arr(arr);
     cout << "--------------------------------------------------" << endl;
 #endif
-    //ÊÍ·Å
+    //é‡Šæ”¾
     delete[] arr;
 }
 
-//2.Ñ¡ÔñÅÅĞò
+//2.é€‰æ‹©æ’åº
 void sort_laobai::Selection_sort(int* _arr) {
-    //Ëã³ö*arrÖĞNµÄÖµ
+    //ç®—å‡º*arrä¸­Nçš„å€¼
     int* p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
         p++;
     }
-    //¼ÆÊı
+    //è®¡æ•°
     int64_t count = 0;
-    //ÉêÇë
+    //ç”³è¯·
     int* arr = new int[N];
-    //¸³Öµ
+    //èµ‹å€¼
     sort_laobai::assign(_arr, arr, N);
-//¼ÆÊ±¿ªÊ¼
+//è®¡æ—¶å¼€å§‹
 #ifdef _WIN32
     stop_watch T;
     T.start();
 #endif
-    //ÅÅĞò
+    //æ’åº
     for (int i = 0; i < N; i++) {
         int m = arr[i];
         int index = i;
@@ -183,40 +183,40 @@ void sort_laobai::Selection_sort(int* _arr) {
             count++;
         }
     }
-//¼ÆÊ±½áÊø
+//è®¡æ—¶ç»“æŸ
 #ifdef _WIN32
     T.stop();
-    cout << "--------------------Ñ¡ÔñÅÅĞòµÄ½á¹û-------------------" << endl;
-    cout << "Time  :" << T.elapsed() << "  ¦Ìs" << endl;
+    cout << "--------------------é€‰æ‹©æ’åºçš„ç»“æœ-------------------" << endl;
+    cout << "Time  :" << T.elapsed() << "  Î¼s" << endl;
     cout << "Count :" << count << endl;
     // if (N < 100)
     //print_arr(arr);
     cout << "--------------------------------------------------" << endl;
 #endif
-    //ÊÍ·Å
+    //é‡Šæ”¾
     delete[] arr;
 }
-//3.Ö±½Ó²åÈëÅÅĞò
+//3.ç›´æ¥æ’å…¥æ’åº
 void sort_laobai::Insertion_sort(int* _arr) {
-    //Ëã³ö*arrÖĞNµÄÖµ
+    //ç®—å‡º*arrä¸­Nçš„å€¼
     int* p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
         p++;
     }
-    //¼ÆÊı
+    //è®¡æ•°
     int64_t count = 0;
-    //ÉêÇë
+    //ç”³è¯·
     int* arr = new int[N];
-    //¸³Öµ
+    //èµ‹å€¼
     sort_laobai::assign(_arr, arr, N);
-//¼ÆÊ±¿ªÊ¼
+//è®¡æ—¶å¼€å§‹
 #ifdef _WIN32
     stop_watch T;
     T.start();
 #endif
-    //ÅÅĞò
+    //æ’åº
     for (int i = 1; i < N; i++) {
         int temp = i;
         for (int j = i - 1; j >= 0; j--) {
@@ -226,41 +226,41 @@ void sort_laobai::Insertion_sort(int* _arr) {
             }
         }
     }
-//¼ÆÊ±½áÊø
+//è®¡æ—¶ç»“æŸ
 #ifdef _WIN32
     T.stop();
-    cout << "--------------------²åÈëÅÅĞòµÄ½á¹û-------------------" << endl;
-    cout << "Time  :" << T.elapsed() << "  ¦Ìs" << endl;
+    cout << "--------------------æ’å…¥æ’åºçš„ç»“æœ-------------------" << endl;
+    cout << "Time  :" << T.elapsed() << "  Î¼s" << endl;
     cout << "Count :" << count << endl;
     //  if (N < 100)
     //   print_arr(arr);
     cout << "--------------------------------------------------" << endl;
 #endif
-    //ÊÍ·Å
+    //é‡Šæ”¾
     delete[] arr;
 }
 
-//4.Ï£¶ûÅÅĞò
+//4.å¸Œå°”æ’åº
 void sort_laobai::Shell_sort(int* _arr) {
-    //Ëã³ö*arrÖĞNµÄÖµ
+    //ç®—å‡º*arrä¸­Nçš„å€¼
     int* p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
         p++;
     }
-    //¼ÆÊı
+    //è®¡æ•°
     int64_t count = 0;
-    //ÉêÇë
+    //ç”³è¯·
     int* arr = new int[N];
-    //¸³Öµ
+    //èµ‹å€¼
     sort_laobai::assign(_arr, arr, N);
-//¼ÆÊ±¿ªÊ¼
+//è®¡æ—¶å¼€å§‹
 #ifdef _WIN32
     stop_watch T;
     T.start();
 #endif
-    //ÅÅĞò
+    //æ’åº
     int gap = N / 2;
     while (gap > 0) {
         int begin = gap - 1;
@@ -270,20 +270,20 @@ void sort_laobai::Shell_sort(int* _arr) {
         }
         gap = gap / 2;
     }
-//¼ÆÊ±½áÊø
+//è®¡æ—¶ç»“æŸ
 #ifdef _WIN32
     T.stop();
-    cout << "--------------------Ï£¶ûÅÅĞòµÄ½á¹û-------------------" << endl;
-    cout << "Time  :" << T.elapsed() << "  ¦Ìs" << endl;
+    cout << "--------------------å¸Œå°”æ’åºçš„ç»“æœ-------------------" << endl;
+    cout << "Time  :" << T.elapsed() << "  Î¼s" << endl;
     cout << "Count :" << count << endl;
     // if (N < 100)
     //     print_arr(arr);
     cout << "--------------------------------------------------" << endl;
 #endif
-    //ÊÍ·Å
+    //é‡Šæ”¾
     delete[] arr;
 }
-//4.Ï£¶ûÅÅĞòµÄ²åÈë(·µ»ØÖµÎªcountµÄÔöÁ¿)
+//4.å¸Œå°”æ’åºçš„æ’å…¥(è¿”å›å€¼ä¸ºcountçš„å¢é‡)
 int64_t sort_laobai::Shell_insert(int* arr, int begin, int gap, int N) {
     int64_t count = 0;
     for (int i = begin + gap; i < N; i += gap) {
@@ -298,49 +298,49 @@ int64_t sort_laobai::Shell_insert(int* arr, int begin, int gap, int N) {
     return count;
 }
 
-//5.¿ìËÙÅÅĞò
+//5.å¿«é€Ÿæ’åº
 void sort_laobai::Quick_sort(int* _arr) {
-    //Ëã³ö*arrÖĞNµÄÖµ
+    //ç®—å‡º*arrä¸­Nçš„å€¼
     int* p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
         p++;
     }
-    //¼ÆÊı
+    //è®¡æ•°
     int64_t count = 0;
-    //ÉêÇë
+    //ç”³è¯·
     int* arr = new int[N];
-    //¸³Öµ
+    //èµ‹å€¼
     sort_laobai::assign(_arr, arr, N);
-//¼ÆÊ±¿ªÊ¼
+//è®¡æ—¶å¼€å§‹
 #ifdef _WIN32
     stop_watch T;
     T.start();
 #endif
-    //ÅÅĞò
+    //æ’åº
     count = Q_Sort(0, N - 1, arr);
-//¼ÆÊ±½áÊø
+//è®¡æ—¶ç»“æŸ
 #ifdef _WIN32
     T.stop();
-    cout << "--------------------¿ìËÙÅÅĞòµÄ½á¹û-------------------" << endl;
-    cout << "Time  :" << T.elapsed() << " ¦Ìs" << endl;
+    cout << "--------------------å¿«é€Ÿæ’åºçš„ç»“æœ-------------------" << endl;
+    cout << "Time  :" << T.elapsed() << " Î¼s" << endl;
     cout << "Count :" << count << endl;
     //  if (N < 100)
     //     print_arr(arr);
     cout << "--------------------------------------------------" << endl;
 #endif
-    //ÊÍ·Å
+    //é‡Šæ”¾
     delete[] arr;
 }
-//5.¿ìËÙÅÅĞòµİ¹é
+//5.å¿«é€Ÿæ’åºé€’å½’
 int64_t sort_laobai::Q_Sort(int left, int right, int* arr) {
     static int64_t count = 0;
     if (left >= right)
         return 0;
     int i, j, base;
     i = left, j = right;
-    base = arr[left];  //È¡×î×ó±ßµÄÊıÎª»ù×¼Êı
+    base = arr[left];  //å–æœ€å·¦è¾¹çš„æ•°ä¸ºåŸºå‡†æ•°
     while (i < j) {
         while (arr[j] >= base && i < j)
             j--;
@@ -351,111 +351,111 @@ int64_t sort_laobai::Q_Sort(int left, int right, int* arr) {
             count++;
         }
     }
-    //»ù×¼Êı¹éÎ»
+    //åŸºå‡†æ•°å½’ä½
     arr[left] = arr[i];
     arr[i] = base;
-    Q_Sort(left, i - 1, arr);   //µİ¹é×ó±ß
-    Q_Sort(i + 1, right, arr);  //µİ¹éÓÒ±ß
+    Q_Sort(left, i - 1, arr);   //é€’å½’å·¦è¾¹
+    Q_Sort(i + 1, right, arr);  //é€’å½’å³è¾¹
     return count;
 }
 
-//6.¶ÑÅÅĞò
+//6.å †æ’åº
 void sort_laobai::Heap_sort(int* _arr) {
-    //Ëã³ö*arrÖĞNµÄÖµ
+    //ç®—å‡º*arrä¸­Nçš„å€¼
     int* p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
         p++;
     }
-    //¼ÆÊı
+    //è®¡æ•°
     int64_t count = 0;
-    //ÉêÇë
+    //ç”³è¯·
     int* arr = new int[N];
-    //¸³Öµ
+    //èµ‹å€¼
     sort_laobai::assign(_arr, arr, N);
-//¼ÆÊ±¿ªÊ¼
+//è®¡æ—¶å¼€å§‹
 #ifdef _WIN32
     stop_watch T;
     T.start();
 #endif
-    //ÅÅĞò
-    //1.¹¹Ôì´ó¶¥¶Ñ
+    //æ’åº
+    //1.æ„é€ å¤§é¡¶å †
     count += adjustHeap(arr, 0, N);
-    //2.½»»»Ñ­»·
+    //2.äº¤æ¢å¾ªç¯
     for (int i = N - 1; i > 0; i--) {
         sort_laobai::swap(arr[0], arr[i]);
         count++;
         count += adjustHeap(arr, 0, i);
     }
-//¼ÆÊ±½áÊø
+//è®¡æ—¶ç»“æŸ
 #ifdef _WIN32
     T.stop();
-    cout << "----------------------¶ÑÅÅĞòµÄ½á¹û-------------------" << endl;
-    cout << "Time  :" << T.elapsed() << "  ¦Ìs" << endl;
+    cout << "----------------------å †æ’åºçš„ç»“æœ-------------------" << endl;
+    cout << "Time  :" << T.elapsed() << "  Î¼s" << endl;
     cout << "Count :" << count << endl;
     //  if (N < 100)
     //      print_arr(arr);
     cout << "--------------------------------------------------" << endl;
 #endif
-    //ÊÍ·Å
+    //é‡Šæ”¾
     delete[] arr;
 }
-//6.µ÷Õû¶Ñ
+//6.è°ƒæ•´å †
 int64_t sort_laobai::adjustHeap(int* arr, int i, int n) {
     int64_t count = 0;
-    int parent = i;         // ¸¸½ÚµãÏÂ±ê
-    int child = 2 * i + 1;  // ×Ó½ÚµãÏÂ±ê
+    int parent = i;         // çˆ¶èŠ‚ç‚¹ä¸‹æ ‡
+    int child = 2 * i + 1;  // å­èŠ‚ç‚¹ä¸‹æ ‡
     while (child < n) {
-        if (child + 1 < n && arr[child] < arr[child + 1]) {  // ÅĞ¶Ï×Ó½ÚµãÄÇ¸ö´ó£¬´óµÄÓë¸¸½Úµã±È½Ï
+        if (child + 1 < n && arr[child] < arr[child + 1]) {  // åˆ¤æ–­å­èŠ‚ç‚¹é‚£ä¸ªå¤§ï¼Œå¤§çš„ä¸çˆ¶èŠ‚ç‚¹æ¯”è¾ƒ
             child++;
         }
-        if (arr[parent] < arr[child]) {                  // ÅĞ¶Ï¸¸½ÚµãÊÇ·ñĞ¡ÓÚ×Ó½Úµã
-            sort_laobai::swap(arr[parent], arr[child]);  // ½»»»¸¸½ÚµãºÍ×Ó½Úµã
+        if (arr[parent] < arr[child]) {                  // åˆ¤æ–­çˆ¶èŠ‚ç‚¹æ˜¯å¦å°äºå­èŠ‚ç‚¹
+            sort_laobai::swap(arr[parent], arr[child]);  // äº¤æ¢çˆ¶èŠ‚ç‚¹å’Œå­èŠ‚ç‚¹
             count++;
-            parent = child;  // ×Ó½ÚµãÏÂ±ê ¸³¸ø ¸¸½ÚµãÏÂ±ê
+            parent = child;  // å­èŠ‚ç‚¹ä¸‹æ ‡ èµ‹ç»™ çˆ¶èŠ‚ç‚¹ä¸‹æ ‡
         }
-        child = child * 2 + 1;  // »»ĞĞ£¬±È½ÏÏÂÃæµÄ¸¸½ÚµãºÍ×Ó½Úµã
+        child = child * 2 + 1;  // æ¢è¡Œï¼Œæ¯”è¾ƒä¸‹é¢çš„çˆ¶èŠ‚ç‚¹å’Œå­èŠ‚ç‚¹
     }
     return count;
 }
 
-//7.¶şÂ·¹é²¢ÅÅĞò
+//7.äºŒè·¯å½’å¹¶æ’åº
 void sort_laobai::Merge_sort(int* _arr) {
-    //Ëã³ö*arrÖĞNµÄÖµ
+    //ç®—å‡º*arrä¸­Nçš„å€¼
     int* p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
         p++;
     }
-    //¼ÆÊı
+    //è®¡æ•°
     int64_t count = 0;
-    //ÉêÇë
+    //ç”³è¯·
     int* arr = new int[N];
-    //¸³Öµ
+    //èµ‹å€¼
     sort_laobai::assign(_arr, arr, N);
-//¼ÆÊ±¿ªÊ¼
+//è®¡æ—¶å¼€å§‹
 #ifdef _WIN32
     stop_watch T;
     T.start();
 #endif
-    //ÅÅĞò
+    //æ’åº
     MergeSort(arr, N, count);
-//¼ÆÊ±½áÊø
+//è®¡æ—¶ç»“æŸ
 #ifdef _WIN32
     T.stop();
-    cout << "----------------------¹é²¢ÅÅĞòµÄ½á¹û-------------------" << endl;
-    cout << "Time  :" << T.elapsed() << "  ¦Ìs" << endl;
+    cout << "----------------------å½’å¹¶æ’åºçš„ç»“æœ-------------------" << endl;
+    cout << "Time  :" << T.elapsed() << "  Î¼s" << endl;
     cout << "Count :" << count << endl;
     //  if (N < 100)
     //      print_arr(arr);
     cout << "----------------------------------------------------" << endl;
 #endif
-    //ÊÍ·Å
+    //é‡Šæ”¾
     delete[] arr;
 }
-//ºÏ²¢
+//åˆå¹¶
 int64_t sort_laobai::Merge(int* A, int* L, int leftCount, int* R, int rightCount) {
     int i, j, k;
     int64_t count = 0;
@@ -507,70 +507,70 @@ void sort_laobai::MergeSort(int* A, int n, int64_t& count) {
     delete[] L;
 }
 
-//8.»ùÊıÅÅĞò
+//8.åŸºæ•°æ’åº
 void sort_laobai::Radix_sort(int* _arr) {
-    //Ëã³ö*arrÖĞNµÄÖµ
+    //ç®—å‡º*arrä¸­Nçš„å€¼
     int* p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
         p++;
     }
-    //¼ÆÊı
+    //è®¡æ•°
     int64_t count = 0;
-    //ÉêÇë
+    //ç”³è¯·
     int* arr = new int[N];
-    //¸³Öµ
+    //èµ‹å€¼
     sort_laobai::assign(_arr, arr, N);
-//¼ÆÊ±¿ªÊ¼
+//è®¡æ—¶å¼€å§‹
 #ifdef _WIN32
     stop_watch T;
     T.start();
-    //ÅÅĞò
+    //æ’åº
     radixsort(arr, N);
-    //¼ÆÊ±½áÊø
+    //è®¡æ—¶ç»“æŸ
     T.stop();
-    cout << "----------------------»ùÊıÅÅĞòµÄ½á¹û-------------------" << endl;
-    cout << "Time  :" << T.elapsed() << "  ¦Ìs" << endl;
+    cout << "----------------------åŸºæ•°æ’åºçš„ç»“æœ-------------------" << endl;
+    cout << "Time  :" << T.elapsed() << "  Î¼s" << endl;
     cout << "Count :" << count << endl;
     //  if (N < 100)
     //      print_arr(arr);
     cout << "--------------------------------------------------" << endl;
 #endif
-    //ÊÍ·Å
+    //é‡Šæ”¾
     delete[] arr;
 }
-//»ùÊıÅÅĞò
+//åŸºæ•°æ’åº
 void sort_laobai::radixsort(int* data, int n) {
     int d = max_bit(data, n);
     int* tmp = new int[n];
-    int* count = new int[10];  //¼ÆÊıÆ÷
+    int* count = new int[10];  //è®¡æ•°å™¨
     int i, j, k;
     int radix = 1;
-    for (i = 1; i <= d; i++)  //½øĞĞd´ÎÅÅĞò
+    for (i = 1; i <= d; i++)  //è¿›è¡Œdæ¬¡æ’åº
     {
         for (j = 0; j < 10; j++)
-            count[j] = 0;  //Ã¿´Î·ÖÅäÇ°Çå¿Õ¼ÆÊıÆ÷
+            count[j] = 0;  //æ¯æ¬¡åˆ†é…å‰æ¸…ç©ºè®¡æ•°å™¨
         for (j = 0; j < n; j++) {
-            k = (data[j] / radix) % 10;  //Í³¼ÆÃ¿¸öÍ°ÖĞµÄ¼ÇÂ¼Êı
+            k = (data[j] / radix) % 10;  //ç»Ÿè®¡æ¯ä¸ªæ¡¶ä¸­çš„è®°å½•æ•°
             count[k]++;
         }
         for (j = 1; j < 10; j++)
-            count[j] = count[j - 1] + count[j];  //½«tmpÖĞµÄÎ»ÖÃÒÀ´Î·ÖÅä¸øÃ¿¸öÍ°
-        for (j = n - 1; j >= 0; j--)             //½«ËùÓĞÍ°ÖĞ¼ÇÂ¼ÒÀ´ÎÊÕ¼¯µ½tmpÖĞ
+            count[j] = count[j - 1] + count[j];  //å°†tmpä¸­çš„ä½ç½®ä¾æ¬¡åˆ†é…ç»™æ¯ä¸ªæ¡¶
+        for (j = n - 1; j >= 0; j--)             //å°†æ‰€æœ‰æ¡¶ä¸­è®°å½•ä¾æ¬¡æ”¶é›†åˆ°tmpä¸­
         {
             k = (data[j] / radix) % 10;
             tmp[count[k] - 1] = data[j];
             count[k]--;
         }
-        for (j = 0; j < n; j++)  //½«ÁÙÊ±Êı×éµÄÄÚÈİ¸´ÖÆµ½dataÖĞ
+        for (j = 0; j < n; j++)  //å°†ä¸´æ—¶æ•°ç»„çš„å†…å®¹å¤åˆ¶åˆ°dataä¸­
             data[j] = tmp[j];
         radix = radix * 10;
     }
     delete[] tmp;
     delete[] count;
 }
-//8.»ùÊıÅÅĞòÇó×î´óÎ»Êı
+//8.åŸºæ•°æ’åºæ±‚æœ€å¤§ä½æ•°
 int sort_laobai::max_bit(int* arr, int N) {
     int max = arr[0];
     int bit = 0;
@@ -582,4 +582,4 @@ int sort_laobai::max_bit(int* arr, int N) {
     return bit;
 }
 
-//22021Äê11ÔÂ5ÈÕ00:06:56
+//22021å¹´11æœˆ5æ—¥00:06:56
