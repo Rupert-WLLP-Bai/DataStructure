@@ -7,6 +7,7 @@
 */
 
 #include "solution.h"
+#include <ctime>
 #include <string>  //字符串
 #include "trie.h"  //Trie树
 
