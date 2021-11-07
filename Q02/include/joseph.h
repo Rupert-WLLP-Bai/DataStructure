@@ -40,7 +40,7 @@ class Joseph {
         gap = GAP;
         rest = REST;
         for (int i = num; i > 0; --i) {
-            List.Insert(0, i);  //初始化
+            List.insert(0, i);  //初始化
         }
     }
     ~Joseph(){};   //析构函数
@@ -71,8 +71,8 @@ void Joseph::solve() {
             pos++;
         }
         del = current->data;
-        List.Remove(pos, del);
-        Del.Insert(Del.Length(), del);
+        List.remove(pos, del);
+        Del.insert(Del.length(), del);
         pos--;
         count--;
     }

@@ -137,7 +137,7 @@ inline void Table::Spawn() {
                 cin.ignore(65536, '\n');
                 cerr << "输入错误，请重新输入第" << count + 1 << "个考生的信息" << endl;
             } else {
-                L.Insert(count, stu[count]);
+                L.insert(count, stu[count]);
                 break;
             }
         }
@@ -158,10 +158,10 @@ inline void Table::Print() {
 inline void Table::Delete(int i) {
     Student del;
     if (L.getData(i) == NULL)
-        cout << "当前位置(#" << i << ")无法删除，当前可选的插入位置范围是: (1 ~" << L.Length() << ")" << endl
+        cout << "当前位置(#" << i << ")无法删除，当前可选的插入位置范围是: (1 ~" << L.length() << ")" << endl
              << endl;
     else {
-        L.Remove(i, del);
+        L.remove(i, del);
         cout << "删除的考生信息为: " << endl;
         cout << setiosflags(ios::left) << setw(12) << "序号" << setw(16) << "姓名"
              << setw(8) << "性别" << setw(8) << "年龄" << setw(10) << "报考类别"
@@ -184,11 +184,11 @@ inline void Table::Insert(int i) {
                 cin.ignore(65536, '\n');
                 cerr << "输入错误，请重新输入修改后的考生的信息" << endl;
             } else {
-                L.Insert(0, ins);  //插入
+                L.insert(0, ins);  //插入
                 break;
             }
         }
-    } else if (L.Locate(i) != NULL && i > 0) {
+    } else if (L.locate(i) != NULL && i > 0) {
         while (1) {
             cout << "输入插入的考生信息，顺序为序号，姓名，性别，年龄，报考类别：" << endl;
             cin >> ins;
@@ -197,12 +197,12 @@ inline void Table::Insert(int i) {
                 cin.ignore(65536, '\n');
                 cerr << "输入错误，请重新输入修改后的考生的信息" << endl;
             } else {
-                L.Insert(i, ins);  //插入
+                L.insert(i, ins);  //插入
                 break;
             }
         }
     } else {
-        cout << "当前位置(#" << i << ")之后无法插入,当前可选的插入位置范围是: (0 ~ " << L.Length() << ")" << endl
+        cout << "当前位置(#" << i << ")之后无法插入,当前可选的插入位置范围是: (0 ~ " << L.length() << ")" << endl
              << endl;
     }
     Print();
@@ -210,7 +210,7 @@ inline void Table::Insert(int i) {
 
 //搜索
 inline void Table::Search(int i) {
-    if (L.Locate(i) != NULL && i > 0) {
+    if (L.locate(i) != NULL && i > 0) {
         cout << "第" << i << "个考生的信息为：" << endl;
         cout << setiosflags(ios::left) << setw(8) << "序号" << setw(8) << "姓名"
              << setw(8) << "性别" << setw(8) << "年龄" << setw(8) << "报考类别"
@@ -218,21 +218,21 @@ inline void Table::Search(int i) {
         cout << *(L.getData(i)) << endl
              << endl;
     } else {
-        cout << "第" << i << "个考生的信息不存在，当前可选的搜索位置是: (1 ~ " << L.Length() << ")" << endl
+        cout << "第" << i << "个考生的信息不存在，当前可选的搜索位置是: (1 ~ " << L.length() << ")" << endl
              << endl;
     }
 }
 
 //修改
 inline void Table::Revise(int i) {
-    if (L.Locate(i) != NULL && i > 0) {
+    if (L.locate(i) != NULL && i > 0) {
         cout << "第" << i << "个考生的信息为：" << endl;
         cout << setiosflags(ios::left) << setw(8) << "序号" << setw(8) << "姓名"
              << setw(8) << "性别" << setw(8) << "年龄" << setw(8) << "报考类别"
              << endl;
         cout << *(L.getData(i)) << endl;
         Student del, ins;
-        L.Remove(i, del);  //删除
+        L.remove(i, del);  //删除
         while (1) {
             cout << "输入修改后的考生信息，顺序为序号，姓名，性别，年龄，报考类别：" << endl;
             cin >> ins;
@@ -241,19 +241,19 @@ inline void Table::Revise(int i) {
                 cin.ignore(65536, '\n');
                 cerr << "输入错误，请重新输入修改后的考生的信息" << endl;
             } else {
-                L.Insert(i - 1, ins);  //插入
+                L.insert(i - 1, ins);  //插入
                 break;
             }
         }
     } else {
-        cout << "当前位置(#" << i << ")无法修改，当前可选的修改位置是: (1 ~ " << L.Length() << ")" << endl;
+        cout << "当前位置(#" << i << ")无法修改，当前可选的修改位置是: (1 ~ " << L.length() << ")" << endl;
         cout << endl;
     }
     Print();
 }
 
 inline bool Table::IsEmpty() {
-    if (L.Length() == 0)
+    if (L.length() == 0)
         return true;
     else
         return false;

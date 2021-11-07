@@ -1,10 +1,13 @@
-/*
-@file:        linkedlist.h
-@description: 单链表
-@version:     v1.0.1
-@author:      Laobai
-@time:        2021年10月22日22:25:49
-*/
+/**
+ * @file list_linked.h
+ * @brief 单链表
+ * @author Laobai (CWLLP1230@gmail.com)
+ * @version 1.0
+ * @date 2021-11-07
+ * 
+ * @copyright Copyright (c) 2021  Laobai
+ * 
+ */
 
 /*
 update notes:
@@ -25,41 +28,37 @@ v1.0.1 2021年10月22日22:25:49
 
 #pragma once
 #include <iostream>
-
-//结点
 template <class T>
 struct LinkNode {
     T data;
     LinkNode<T>* link;
-    LinkNode(LinkNode<T>* ptr = NULL) {
+    explicit LinkNode(LinkNode<T>* ptr = NULL) {
         link = ptr;
     }
-    LinkNode(const T& item, LinkNode<T>* ptr = NULL) {
+    explicit LinkNode(const T& item, LinkNode<T>* ptr = NULL) {
         data = item;
         link = ptr;
     }
 };
 
 template <class T>
-class List {
+class List{
    public:
     List() { first = new LinkNode<T>; }               //无参构造
-    List(const T& x) { first = new LinkNode<T>(x); }  //带参构造
+    explicit List(const T& x) { first = new LinkNode<T>(x); }  //带参构造
     List(List<T>& L);                                 //拷贝构造
     ~List() { makeEmpty(); }                          //析构
     void makeEmpty();                                 //表置空
-    int Length() const;                               //返回长度
+    int length() const;                               //返回长度
     LinkNode<T>* getHead() const { return first; }    //返回头结点地址
-    LinkNode<T>* Search(T x);                         //搜索表中是否有value为x的结点
-    LinkNode<T>* Locate(int i);                       //返回第i个元素的结点地址
-    T* getData(int i);                                //返回第i个元素的vaule的地址
+    LinkNode<T>* search(T x);                         //搜索表中是否有value为x的结点
+    LinkNode<T>* locate(int i);                       //返回第i个元素的结点地址
+    T* getData(int i);                                //返回第i个元素的value的地址
     void setData(int i, T& x);                        //修改第i个元素的value为x
-    bool Insert(int i, T& x);                         //在第i个元素之后插入
-    bool Remove(int i, T& x);                         //移除第i个结点
-    bool IsEmpty() const;                             //判空
-    bool IsFull() const;                              //判满
-    void Sort();                                      //排序(未实现)
-    void input();                                     //输入(未实现)
+    bool insert(int i, T& x);                         //在第i个元素之后插入
+    bool remove(int i, T& x);                         //移除第i个结点
+    bool empty() const;                             //判空
+    bool full() const;                              //判满
     void output();                                    //输出
     List<T>& operator=(List<T>& L);                   //重载赋值运算符
     void inputFront(T endTag);                        //前插法建立
@@ -96,7 +95,7 @@ void List<T>::makeEmpty() {
 
 //计算带附加头结点的单链表的长度
 template <class T>
-int List<T>::Length() const {
+int List<T>::length() const {
     LinkNode<T>* p = first->link;
     int count = 0;
     while (p != NULL) {
@@ -108,7 +107,7 @@ int List<T>::Length() const {
 
 //在表中搜索含数据x的结点，搜索成功时函数返回该结点地址，否则返回NULL
 template <class T>
-LinkNode<T>* List<T>::Search(T x) {
+LinkNode<T>* List<T>::search(T x) {
     LinkNode<T>* current = first->link;
     while (current != NULL) {
         if (current->data == x)
@@ -121,7 +120,7 @@ LinkNode<T>* List<T>::Search(T x) {
 
 //定位，返回第i个位置的结点地址
 template <class T>
-LinkNode<T>* List<T>::Locate(int i) {
+LinkNode<T>* List<T>::locate(int i) {
     if (i < 0)  //i不合理
         return NULL;
     LinkNode<T>* current = first;
@@ -138,7 +137,7 @@ template <class T>
 T* List<T>::getData(int i) {
     if (i <= 0)  //i值太小
         return NULL;
-    LinkNode<T>* current = Locate(i);  //定位到i
+    LinkNode<T>* current = locate(i);  //定位到i
     if (current == NULL)               //i值太大
         return NULL;
     return &current->data;
@@ -149,7 +148,7 @@ template <class T>
 void List<T>::setData(int i, T& x) {
     if (i <= 0)  //i值太小
         return;
-    LinkNode<T>* current = Locate(i);
+    LinkNode<T>* current = locate(i);
     if (current == NULL)  //i值太大
         return;
     else
@@ -158,8 +157,8 @@ void List<T>::setData(int i, T& x) {
 
 //将新元素x插入在链表中第i个结点之后
 template <class T>
-bool List<T>::Insert(int i, T& x) {
-    LinkNode<T>* current = Locate(i);
+bool List<T>::insert(int i, T& x) {
+    LinkNode<T>* current = locate(i);
     if (current == NULL)  //插入不成功
         return false;
     LinkNode<T>* newNode = new LinkNode<T>(x);
@@ -174,8 +173,8 @@ bool List<T>::Insert(int i, T& x) {
 
 //将链表中的第i个元素删去，通过引用型参数x返回该元素的值
 template <class T>
-bool List<T>::Remove(int i, T& x) {
-    LinkNode<T>* current = Locate(i - 1);
+bool List<T>::remove(int i, T& x) {
+    LinkNode<T>* current = locate(i - 1);
     if (current == NULL || current->link == NULL)  //删除不成功
         return false;
     LinkNode<T>* del = current->link;  //del定义为current的后继
@@ -187,7 +186,7 @@ bool List<T>::Remove(int i, T& x) {
 
 //判空
 template <class T>
-bool List<T>::IsEmpty() const {
+bool List<T>::empty() const {
     if (first->data == NULL)
         return true;
     else
@@ -196,7 +195,7 @@ bool List<T>::IsEmpty() const {
 
 //判满
 template <class T>
-bool List<T>::IsFull() const {
+bool List<T>::full() const {
     return false;
 }
 
