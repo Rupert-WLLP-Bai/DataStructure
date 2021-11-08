@@ -57,7 +57,7 @@ class binary_search_tree {
 /*默认构造函数*/
 template <typename T>
 binary_search_tree<T>::binary_search_tree()
-    : root(nullptr){}
+    : root(nullptr) {}
 
 /*析构函数*/
 template <typename T>
@@ -255,7 +255,7 @@ template <typename T>
 void binary_search_tree<T>::inOrder(BSNode<T>* p) {
     if (p != nullptr) {
         inOrder(p->left_child);
-        cout << p->value << "-->";
+        cout << p->value << " --> ";
         inOrder(p->right_child);
     }
 }
@@ -313,7 +313,8 @@ void binary_search_tree<T>::destory(BSNode<T>*& p) {
     }
 }
 
-template<typename T>
+template <typename T>
 void binary_search_tree<T>::print() {
     this->inOrder();
+    cout << endl;
 }
