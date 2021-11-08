@@ -1,27 +1,26 @@
-#ifndef BINARY_SEARCH_TREE_HPP
-#define BINARY_SEARCH_TREE_HPP
+#pragma once
 #include <iostream>
 using namespace std;
 //二叉查找树的节点结构
 template <typename T>
 struct BSNode {
-    BSNode(T t)
-        : value(t), lchild(nullptr), rchild(nullptr) {}
+    explicit BSNode(T t)
+        : value(t), left_child(nullptr), right_child(nullptr) {}
 
     BSNode() = default;
 
     T value;
-    BSNode<T>* lchild;
-    BSNode<T>* rchild;
+    BSNode<T>* left_child;
+    BSNode<T>* right_child;
     BSNode<T>* parent;
 };
 
 //二叉查找树类
 template <typename T>
-class BSTree {
+class binary_search_tree {
    public:
-    BSTree();
-    ~BSTree();
+    binary_search_tree();
+    ~binary_search_tree();
 
     void preOrder();   //前序遍历二叉树
     void inOrder();    //中序遍历二叉树
@@ -34,8 +33,8 @@ class BSTree {
     T search_minimun();  //查找最小元素
     T search_maximum();  //查找最大元素
 
-    BSNode<T>* successor(BSNode<T>* x);    //查找指定节点的后继节点
-    BSNode<T>* predecessor(BSNode<T>* x);  //查找指定节点的前驱节点
+    BSNode<T>* successor(BSNode<T>* pnode);    //查找指定节点的后继节点
+    BSNode<T>* predecessor(BSNode<T>* pnode);  //查找指定节点的前驱节点
 
     void insert(T key);  //插入指定值节点
     void remove(T key);  //删除指定值节点
@@ -57,17 +56,17 @@ class BSTree {
 
 /*默认构造函数*/
 template <typename T>
-BSTree<T>::BSTree()
-    : root(nullptr){};
+binary_search_tree<T>::binary_search_tree()
+    : root(nullptr){}
 
 /*析构函数*/
 template <typename T>
-BSTree<T>::~BSTree() {
+binary_search_tree<T>::~binary_search_tree() {
     destory(root);
-};
+}
 /*插入函数*/
 template <typename T>
-void BSTree<T>::insert(T key) {
+void binary_search_tree<T>::insert(T key) {
     BSNode<T>* pparent = nullptr;
     BSNode<T>* pnode = root;
 
@@ -75,9 +74,9 @@ void BSTree<T>::insert(T key) {
     {
         pparent = pnode;
         if (key > pnode->value)
-            pnode = pnode->rchild;
+            pnode = pnode->right_child;
         else if (key < pnode->value)
-            pnode = pnode->lchild;
+            pnode = pnode->left_child;
         else {
             cout << key << "已存在" << endl;
             return;  //重复插入无效
@@ -90,72 +89,72 @@ void BSTree<T>::insert(T key) {
         root = pnode;  //则新节点为根
     } else {
         if (key > pparent->value) {
-            pparent->rchild = pnode;  //否则新节点为其父节点的左孩
+            pparent->right_child = pnode;  //否则新节点为其父节点的左孩
         } else
-            pparent->lchild = pnode;  //或右孩
+            pparent->left_child = pnode;  //或右孩
     }
     pnode->parent = pparent;  //指明新节点的父节点
-};
+}
 
 /*查找指定元素的节点（非递归）*/
 template <typename T>
-BSNode<T>* BSTree<T>::search_Iterator(T key) {
+BSNode<T>* binary_search_tree<T>::search_Iterator(T key) {
     BSNode<T>* pnode = root;
     while (pnode != nullptr) {
         if (key == pnode->value)  //找到
             return pnode;
         if (key > pnode->value)  //关键字比节点值大，在节点右子树查找
-            pnode = pnode->rchild;
+            pnode = pnode->right_child;
         else
-            pnode = pnode->lchild;  //关键字比节点值小，在节点左子树查找
+            pnode = pnode->left_child;  //关键字比节点值小，在节点左子树查找
     }
     return nullptr;
-};
+}
 
 /*查找指定元素的节点（递归）*/
 template <typename T>
-BSNode<T>* BSTree<T>::search_recursion(T key) {
+BSNode<T>* binary_search_tree<T>::search_recursion(T key) {
     return search(root, key);
-};
+}
 
 /*private:search()*/
 /*递归查找的类内部实现*/
 template <typename T>
-BSNode<T>* BSTree<T>::search(BSNode<T>*& pnode, T key) {
+BSNode<T>* binary_search_tree<T>::search(BSNode<T>*& pnode, T key) {
     if (pnode == nullptr)
         return nullptr;
     if (pnode->value == key)
         return pnode;
     //cout << "-->" << pnode->value << endl; //可以输出查找路径
     if (key > pnode->value)
-        return search(pnode->rchild, key);
-    return search(pnode->lchild, key);
-};
+        return search(pnode->right_child, key);
+    return search(pnode->left_child, key);
+}
 
 /*删除指定节点*/
 template <typename T>
-void BSTree<T>::remove(T key) {
+void binary_search_tree<T>::remove(T key) {
     remove(root, key);
-};
+}
 /*删除指定节点*/
 /*内部使用函数*/
 template <typename T>
-void BSTree<T>::remove(BSNode<T>* pnode, T key) {
+void binary_search_tree<T>::remove(BSNode<T>* pnode, T key) {
     if (pnode != nullptr) {
         if (pnode->value == key) {
             BSNode<T>* pdel = nullptr;
 
-            if (pnode->lchild == nullptr || pnode->rchild == nullptr)
+            if (pnode->left_child == nullptr || pnode->right_child == nullptr)
                 pdel = pnode;  //情况二、三：被删节点只有左子树或右子树，或没有孩子
             else
                 pdel = predecessor(pnode);  //情况一：被删节点同时有左右子树，则删除该节点的前驱
 
             //此时，被删节点只有一个孩子（或没有孩子）.保存该孩子指针
             BSNode<T>* pchild = nullptr;
-            if (pdel->lchild != nullptr)
-                pchild = pdel->lchild;
+            if (pdel->left_child != nullptr)
+                pchild = pdel->left_child;
             else
-                pchild = pdel->rchild;
+                pchild = pdel->right_child;
 
             //让孩子指向被删除节点的父节点
             if (pchild != nullptr)
@@ -166,10 +165,10 @@ void BSTree<T>::remove(BSNode<T>* pnode, T key) {
                 root = pchild;
 
             //如果要删除的节点不是头节点，要注意更改它的双亲节点指向新的孩子节点
-            else if (pdel->parent->lchild == pdel) {
-                pdel->parent->lchild = pchild;
+            else if (pdel->parent->left_child == pdel) {
+                pdel->parent->left_child = pchild;
             } else {
-                pdel->parent->rchild = pchild;
+                pdel->parent->right_child = pchild;
             }
 
             if (pnode->value != pdel->value)
@@ -178,11 +177,11 @@ void BSTree<T>::remove(BSNode<T>* pnode, T key) {
         }
         //进行递归删除
         else if (key > pnode->value) {
-            remove(pnode->rchild, key);
+            remove(pnode->right_child, key);
         } else
-            remove(pnode->lchild, key);
+            remove(pnode->left_child, key);
     }
-};
+}
 /*寻找其前驱节点*/
 /*
 一个节点的前驱节点有3种情况：
@@ -191,23 +190,23 @@ void BSTree<T>::remove(BSNode<T>* pnode, T key) {
 3. 它没有左子树，且它本身为左子树，则它的前驱节点为“第一个拥有右子树的父节点”
 */
 template <typename T>
-BSNode<T>* BSTree<T>::predecessor(BSNode<T>* pnode) {
-    if (pnode->lchild != nullptr) {
-        pnode = pnode->lchild;
-        while (pnode->rchild != nullptr) {
-            pnode = pnode->rchild;
+BSNode<T>* binary_search_tree<T>::predecessor(BSNode<T>* pnode) {
+    if (pnode->left_child != nullptr) {
+        pnode = pnode->left_child;
+        while (pnode->right_child != nullptr) {
+            pnode = pnode->right_child;
         }
         return pnode;
     }
 
     BSNode<T>* pparent = pnode->parent;
-    while (pparent != nullptr && pparent->lchild == pnode)  //如果进入循环，则是第三种情况；否则为第二种情况
+    while (pparent != nullptr && pparent->left_child == pnode)  //如果进入循环，则是第三种情况；否则为第二种情况
     {
         pnode = pparent;
         pparent = pparent->parent;
     }
     return pparent;
-};
+}
 
 /*寻找其后继节点*/
 /*
@@ -217,100 +216,104 @@ BSNode<T>* BSTree<T>::predecessor(BSNode<T>* pnode) {
 3. 它没有右子树，但它本身是一个右孩子，则其后继节点为“具有左孩子的最近父节点”
 */
 template <typename T>
-BSNode<T>* BSTree<T>::successor(BSNode<T>* pnode) {
-    if (pnode->rchild != nullptr) {
-        pnode = pnode->rchild;
-        while (pnode->lchild != nullptr) {
-            pnode = pnode->lchild;
+BSNode<T>* binary_search_tree<T>::successor(BSNode<T>* pnode) {
+    if (pnode->right_child != nullptr) {
+        pnode = pnode->right_child;
+        while (pnode->left_child != nullptr) {
+            pnode = pnode->left_child;
         }
         return pnode;
     }
 
     BSNode<T>* pparent = pnode->parent;
-    while (pparent != nullptr && pparent->rchild == pnode) {
+    while (pparent != nullptr && pparent->right_child == pnode) {
         pnode = pparent;
         pparent = pparent->parent;
     }
     return pparent;
-};
+}
 
 /*前序遍历算法*/
 template <typename T>
-void BSTree<T>::preOrder() {
+void binary_search_tree<T>::preOrder() {
     preOrder(root);
-};
+}
 template <typename T>
-void BSTree<T>::preOrder(BSNode<T>* p) {
+void binary_search_tree<T>::preOrder(BSNode<T>* p) {
     if (p != nullptr) {
         cout << p->value << endl;
-        preOrder(p->lchild);
-        preOrder(p->rchild);
+        preOrder(p->left_child);
+        preOrder(p->right_child);
     }
-};
+}
 /*中序遍历算法*/
 template <typename T>
-void BSTree<T>::inOrder() {
+void binary_search_tree<T>::inOrder() {
     inOrder(root);
-};
+}
 template <typename T>
-void BSTree<T>::inOrder(BSNode<T>* p) {
+void binary_search_tree<T>::inOrder(BSNode<T>* p) {
     if (p != nullptr) {
-        inOrder(p->lchild);
+        inOrder(p->left_child);
         cout << p->value << "-->";
-        inOrder(p->rchild);
+        inOrder(p->right_child);
     }
-};
+}
 /*后序遍历算法*/
 template <typename T>
-void BSTree<T>::postOrder() {
+void binary_search_tree<T>::postOrder() {
     postOrder(root);
-};
+}
 template <typename T>
-void BSTree<T>::postOrder(BSNode<T>* p) {
+void binary_search_tree<T>::postOrder(BSNode<T>* p) {
     if (p != nullptr) {
-        postOrder(p->lchild);
-        postOrder(p->rchild);
+        postOrder(p->left_child);
+        postOrder(p->right_child);
         cout << p->value << endl;
     }
-};
+}
 /*寻找最小元素*/
 template <typename T>
-T BSTree<T>::search_minimun() {
+T binary_search_tree<T>::search_minimun() {
     return search_minimun(root);
-};
+}
 template <typename T>
-T BSTree<T>::search_minimun(BSNode<T>* p) {
-    if (p->lchild != nullptr)
-        return search_minimun(p->lchild);
+T binary_search_tree<T>::search_minimun(BSNode<T>* p) {
+    if (p->left_child != nullptr)
+        return search_minimun(p->left_child);
     return p->value;
-};
+}
 
 /*寻找最大元素*/
 template <typename T>
-T BSTree<T>::search_maximum() {
+T binary_search_tree<T>::search_maximum() {
     return search_maximum(root);
-};
+}
 template <typename T>
-T BSTree<T>::search_maximum(BSNode<T>* p) {
-    if (p->rchild != nullptr)
-        return search_maximum(p->rchild);
+T binary_search_tree<T>::search_maximum(BSNode<T>* p) {
+    if (p->right_child != nullptr)
+        return search_maximum(p->right_child);
     return p->value;
-};
+}
 
 /*销毁二叉树*/
 template <typename T>
-void BSTree<T>::destory() {
+void binary_search_tree<T>::destory() {
     destory(root);
-};
+}
 template <typename T>
-void BSTree<T>::destory(BSNode<T>*& p) {
+void binary_search_tree<T>::destory(BSNode<T>*& p) {
     if (p != nullptr) {
-        if (p->lchild != nullptr)
-            destory(p->lchild);
-        if (p->rchild != nullptr)
-            destory(p->rchild);
+        if (p->left_child != nullptr)
+            destory(p->left_child);
+        if (p->right_child != nullptr)
+            destory(p->right_child);
         delete p;
         p = nullptr;
     }
-};
-#endif
+}
+
+template<typename T>
+void binary_search_tree<T>::print() {
+    this->inOrder();
+}
