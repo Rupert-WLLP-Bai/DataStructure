@@ -6,7 +6,7 @@
 using namespace std;
 
 //1. 获取操作 第一次只能选择建立(可以输入为空)
-void first_input(binary_search_tree<int> &tree) {
+void first_input(binary_search_tree<int>& tree) {
     while (true) {
         print_menu();
         int choice = fetch_choice();
@@ -16,35 +16,36 @@ void first_input(binary_search_tree<int> &tree) {
             exit(0);
         } else if (choice != CREATE) {
             cout << "第一次只能选择建立操作，输入回车即建立空树,按回车继续" << endl;
-            getchar();
+            getchar();  //输入回车继续
 #ifdef _WIN32
-            system("cls");
+            int res = system("cls");
 #else
-            system("clear");
+            int res = system("clear");
 #endif
             continue;
         } else {
             int temp;
-            cout << "输入一些数(用空格分隔)以建立二叉排序树，输入回车则建立空树" << endl;
-            while (cin>>temp){
+            cout << "输入一些数(用空格分隔)以建立二叉排序树，输入回车则建立空树,任意输入一个字母为终止符"
+                 << endl;
+            while (cin >> temp) {
                 tree.insert(temp);
             }
             cin.clear();
-            cin.ignore(65536,'\n');
-
-            cout << "binary_search_tree is :" << endl;
+            cin.ignore(65536, '\n');
+            cout << "------ 建 立 成 功 ------" << endl;
+            cout << "Binary_search_tree is :" << endl;
             tree.inOrder();
             cout << endl;
+            cout << "--------------------" << endl;
             return;
-
-
         }
     }
 }
 
 //2. 第二次开始禁用建立操作 只能选择插入 查询 退出
-void other_input(binary_search_tree<int> &tree) {
+void other_input(binary_search_tree<int>& tree) {
     while (true) {
+        print_menu();
         int choice = fetch_choice();
         if (choice == QUIT) {
             cout << "Exit in input" << endl;
@@ -65,6 +66,7 @@ void other_input(binary_search_tree<int> &tree) {
                     continue;
                 } else {
                     tree.insert(temp);
+                    cout << "------ 插 入 成 功 ------" << endl;
                     break;
                 }
             }
@@ -79,8 +81,8 @@ void other_input(binary_search_tree<int> &tree) {
                     cin.ignore(INT32_MAX, '\n');
                     cout << "输入错误！" << endl;
                     continue;
-                } else {
-                    BSNode<int> *val = tree.search_recursion(temp);
+                } else if (choice == SEARCH) {
+                    BSNode<int>* val = tree.search_recursion(temp);
                     if (val != nullptr)
                         cout << "查找成功" << endl;
                     else
@@ -88,6 +90,10 @@ void other_input(binary_search_tree<int> &tree) {
                     break;
                 }
             }
+        } else {
+            cout << "---------- 输 出 ----------" << endl;
+            tree.print();
+            cout << "----------结 束 ----------" << endl;
         }
     }
 }
