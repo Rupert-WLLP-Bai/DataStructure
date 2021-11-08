@@ -9,8 +9,10 @@
 using namespace std;
 
 int main() {
-    //signal(SIGSEGV, signal_handler);
-
+//signal(SIGSEGV, signal_handler);
+#ifdef _WIN32
+    system("chcp 65001");
+#endif
     int row, col;
     get_input(row, MIN_SIZE, MAX_SIZE, "输入迷宫行数(1 ~ 30): ");
     get_input(col, MIN_SIZE, MAX_SIZE, "输入迷宫列数(1 ~ 30): ");
