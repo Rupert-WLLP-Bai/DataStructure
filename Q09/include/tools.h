@@ -27,6 +27,7 @@ void print_menu() {
     cout << "======================================================" << endl;
     cout << "注: 数据范围(" << INT32_MIN << " ~ " << INT32_MAX << ")" << endl;
     cout << endl;
+    cout << "选择相应操作" << endl;
 }
 
 int fetch_choice() {

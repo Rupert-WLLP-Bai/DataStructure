@@ -11,7 +11,8 @@ void first_input(binary_search_tree<int>& tree) {
         print_menu();
         int choice = fetch_choice();
         if (choice == QUIT) {
-            cout << "Exit in first input" << endl;
+            //cout << "Exit in first input" << endl;
+            cout << "EXIT" << endl;
             tree.destory();
             exit(0);
         } else if (choice != CREATE) {
@@ -48,11 +49,11 @@ void other_input(binary_search_tree<int>& tree) {
         print_menu();
         int choice = fetch_choice();
         if (choice == QUIT) {
-            cout << "Exit in input" << endl;
+            cout << "EXIT" << endl;
             tree.destory();
             exit(0);
         } else if (choice == CREATE) {
-            cout << "BSTree已存在，请使用插入和查询操作" << endl;
+            cout << "排序树已建立，请使用插入和查询操作" << endl;
             continue;
         } else if (choice == INSERT) {
             while (true) {
