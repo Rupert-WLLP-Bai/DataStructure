@@ -18,27 +18,31 @@ int main() {
     char order;
     Family_Tree.Family_tree();  //先建立祖先
     cin >> order;
-    while (order != 'E') {
-        switch (order) {
-            case 'A':
-                Family_Tree.Establish_family();
-                break;
-            case 'B':
-                Family_Tree.Add_member();
-                break;
-            case 'C':
-                Family_Tree.Divorce_member();
-                break;
-            case 'D':
-                Family_Tree.Change_member();
-                break;
-            default:
-                cout << "请输入正确的命令";
-                break;
+    try {
+        while (order != 'E') {
+            switch (order) {
+                case 'A':
+                    Family_Tree.Establish_family();
+                    break;
+                case 'B':
+                    Family_Tree.Add_member();
+                    break;
+                case 'C':
+                    Family_Tree.Divorce_member();
+                    break;
+                case 'D':
+                    Family_Tree.Change_member();
+                    break;
+                default:
+                    cout << "请输入正确的命令";
+                    break;
+            }
+            cout << endl
+                 << endl
+                 << "请选择要执行的操作：";
+            cin >> order;
         }
-        cout << endl
-             << endl
-             << "请选择要执行的操作：";
-        cin >> order;
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << '\n';
     }
 }
