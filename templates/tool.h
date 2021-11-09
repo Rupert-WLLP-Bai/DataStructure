@@ -1,6 +1,4 @@
 /*
-@file:        joseph.h
-/*
 @file:        tool.h
 @description: 工具函数
 @version:     v1.0.0
