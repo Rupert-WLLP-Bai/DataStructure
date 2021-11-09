@@ -67,7 +67,7 @@ void other_input(binary_search_tree<int>& tree) {
                     continue;
                 } else {
                     tree.insert(temp);
-                    cout << "------ 插 入 成 功 ------" << endl;
+                    cout << "---------- 插 入 成 功 ----------" << endl;
                     break;
                 }
             }
@@ -92,9 +92,9 @@ void other_input(binary_search_tree<int>& tree) {
                 }
             }
         } else {
-            cout << "---------- 输 出 ----------" << endl;
+            cout << "--------------- 输 出 ---------------" << endl;
             tree.print();
-            cout << "----------结 束 ----------" << endl;
+            cout << "--------------- 结 束 ---------------" << endl;
         }
     }
 }
