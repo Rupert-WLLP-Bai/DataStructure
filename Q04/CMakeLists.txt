@@ -6,6 +6,7 @@ project("NQueens")
 file(GLOB_RECURSE SRC_DIR_LIST "src/*.cpp")
 # 添加头文件
 include_directories(./include)
+include_directories(../templates)
 # 添加生成可执行文件
 add_executable(NQueens ${SRC_DIR_LIST})
 # 设置版本号
