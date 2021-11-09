@@ -10,5 +10,5 @@ include_directories(../templates)
 # 添加生成可执行文件
 add_executable(JosephProblem ${SRC_DIR_LIST})
 # 设置版本号
-set_target_properties(JosephProblem PROPERTIES VERSION 1.0.3)
+set_target_properties(JosephProblem PROPERTIES VERSION v1.0.3)
 

@@ -3,7 +3,7 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-project ("Data_Structure")
+project ("DataStructure")
 
 # 包含子项目。
 add_subdirectory ("Q01")
@@ -11,7 +11,7 @@ add_subdirectory ("Q02")
 add_subdirectory ("Q03")
 add_subdirectory ("Q04")
 add_subdirectory ("Q05")
-# add_subdirectory ("Q06")
+add_subdirectory ("Q06")
 # add_subdirectory ("Q07")
 # add_subdirectory ("Q08")
 add_subdirectory ("Q09")

@@ -1,6 +1,6 @@
 /**
  * @file binTree.h
- * @brief 二叉树
+ * @brief 二叉树 包含了一些基本操作
  * @author Laobai (CWLLP1230@gmail.com)
  * @version 1.0
  * @date 2021-11-08
@@ -15,10 +15,9 @@
 #include <stack>
 using namespace std;
 
-//二叉树节点类的定义，使用二叉链表
+/*二叉树节点类的定义，使用二叉链表*/
 template <class T>
-struct BinTreeNode
-{
+struct BinTreeNode {
     T data;
     BinTreeNode<T>*leftChild, *rightChild;
     BinTreeNode()
@@ -27,9 +26,9 @@ struct BinTreeNode
         : data(x), leftChild(l), rightChild(r) {}
 };
 
+/*二叉树*/
 template <class T>
-class BinaryTree  //二叉树的模板类
-{
+class BinaryTree {
    public:
     BinaryTree()
         : root(NULL) {}
@@ -55,7 +54,7 @@ class BinaryTree  //二叉树的模板类
     int height() const { return height(root); }                                                                                         //使用后序递归遍历求二叉树的高度
    protected:
     BinTreeNode<T>* root;
-    char RefValue;                                                                 //数据输入停止标志
+    char RefValue;                                                                   //数据输入停止标志
     void destroy(BinTreeNode<T>* subTree);                                           //递归删除二叉树节点，后序遍历删除
     BinTreeNode<T>* copy(const BinTreeNode<T>* orignode);                            //copy构造;前序
     BinTreeNode<T>* parent(BinTreeNode<T>* subTree, BinTreeNode<T>* current) const;  //返回父节点
@@ -65,9 +64,18 @@ class BinaryTree  //二叉树的模板类
     void preOrder(BinTreeNode<T>* subTree, void (*visit)(BinTreeNode<T>* p));        //前序遍历
     void postOrder(BinTreeNode<T>* subTree, void (*visit)(BinTreeNode<T>* p));       //后序遍历
     int size(BinTreeNode<T>* subTree) const;                                         //使用后序递归遍历求节点个数
-    int height(BinTreeNode<T>* subTree) const;                                       //使用后序递归遍历求二叉树的高度
-    friend ostream& operator<<<T>(ostream& out, const BinaryTree<T>& rhs);           //add <T> 前序输出二叉树
-    friend istream& operator>><T>(istream& in, BinaryTree<T>& rhs);                  //add <T> 采用广义表表示方式创建二叉树
+    int height(BinTreeNode<T>* subTree) const;
+    //add <T> 前序输出二叉树                                   //使用后序递归遍历求二叉树的高度
+    friend ostream& operator<<(ostream& out, const BinaryTree<T>& rhs) {
+        rhs.traverse(rhs.root, out);
+        out << endl;
+        return out;
+    }
+    //add <T> 采用广义表表示方式创建二叉树
+    friend istream& operator>>(istream& in, BinaryTree<T>& rhs) {
+        rhs.createBinTree(in, rhs.root);
+        return in;
+    }
 };
 
 /**
@@ -100,7 +108,9 @@ BinTreeNode<T>* BinaryTree<T>::parent(BinTreeNode<T>* subTree, BinTreeNode<T>* c
 
     BinTreeNode<T>* p;
     if ((p = parent(subTree->leftChild, current)) != NULL)
-        return p else return parent(subTree->rightChild, current);
+        return p;
+    else
+        return parent(subTree->rightChild, current);
 }
 
 /**
@@ -158,33 +168,6 @@ void BinaryTree<T>::createBinTree(istream& in, BinTreeNode<T>*& subTree) {
         }
         in >> ch;
     }
-}
-
-/**
- * @brief 重载输出二叉树
- * @tparam T 
- * @param  out              
- * @param  rhs              
- * @return ostream& 
- */
-template <class T>
-ostream& operator<<(ostream& out, const BinaryTree<T>& rhs) {
-    rhs.traverse(rhs.root, out);
-    out << endl;
-    return out;
-}
-
-/**
- * @brief 重载输入建立二叉树
- * @tparam T 
- * @param  in               
- * @param  rhs              
- * @return istream& 
- */
-template <class T>
-istream& operator>>(istream& in, BinaryTree<T>& rhs) {
-    rhs.createBinTree(in, rhs.root);
-    return in;
 }
 
 /**

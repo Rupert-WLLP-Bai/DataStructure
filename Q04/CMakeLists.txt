@@ -9,4 +9,4 @@ include_directories(./include)
 # 添加生成可执行文件
 add_executable(NQueens ${SRC_DIR_LIST})
 # 设置版本号
-set_target_properties(NQueens PROPERTIES VERSION 1.0.2)
+set_target_properties(NQueens PROPERTIES VERSION v1.0.2)
