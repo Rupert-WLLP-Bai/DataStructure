@@ -15,8 +15,9 @@
 #include <stack>
 using namespace std;
 
+//二叉树节点类的定义，使用二叉链表
 template <class T>
-struct BinTreeNode  //二叉树节点类的定义，使用二叉链表
+struct BinTreeNode
 {
     T data;
     BinTreeNode<T>*leftChild, *rightChild;
