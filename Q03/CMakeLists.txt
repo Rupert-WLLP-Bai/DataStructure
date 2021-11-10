@@ -1,7 +1,7 @@
 # cmake最低版本
 cmake_minimum_required(VERSION 3.8)
 # 命名项目
-project("MazeProblem")
+project(MazeProblem VERSION 0.1.1)
 # 添加源文件
 file(GLOB_RECURSE SRC_DIR_LIST "src/*.cpp")
 # 添加头文件
