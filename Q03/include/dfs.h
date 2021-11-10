@@ -1,4 +1,4 @@
-//DFS 不使用并查集
+//dfs_solving 不使用并查集
 #include <algorithm>
 #include <cmath>
 #include <fstream>
@@ -6,16 +6,16 @@
 #include <iostream>
 #include <stack>
 #include <vector>
-#include "Maze.h"
+#include "maze.h"
 using namespace std;
 
-class DFS {
+class dfs {
    public:
-    void get_choice(int* choice, int current, Maze A);
-    bool search_neighbors(int* neighbor_visited, int current, Maze A, vector<int> visited);
-    void generate(Maze& A) {  //生成迷宫
+    void get_choice(int* choice, int current, maze A);
+    bool search_neighbors(int* neighbor_visited, int current, maze A, vector<int> visited);
+    void generate(maze& A) {  //生成迷宫
         //const char* F[] = {"上", "下", "左", "右"};
-        srand(time(NULL));
+        srand((unsigned int)time(NULL));
         A.L.push(A.start);                              //起始位置入栈
         A.map[A.start._x][A.start._y]._visited = true;  //起点标记为已被访问
         int current_x, current_y;                       //现在节点所在的位置
@@ -62,21 +62,21 @@ class DFS {
             //A.print_node_all();
         }
     }
-    void solve(Maze A);          //SOLVE
-    void print_results(Maze A);  //Maze和Solution
+    void solve(maze A);          //SOLVE
+    void print_results(maze A);  //Maze和Solution
 
    private:
     deque<int> solution;
 };
-void DFS::get_choice(int* choice, int current, Maze A) {
+void dfs::get_choice(int* choice, int current, maze A) {
     Node L = A.map[current / A.column][current % A.column];
     choice[0] = L._up;
     choice[1] = L._down;
     choice[2] = L._left;
     choice[3] = L._right;
 }
-void DFS::solve(Maze A) {
-    srand(time(NULL));
+void dfs::solve(maze A) {
+    srand((unsigned int)time(NULL));
     vector<int> visited;  //记录已经访问的点
     int choice[4];
     int direction;
@@ -89,7 +89,7 @@ void DFS::solve(Maze A) {
         if (flag) {
             while (1) {  //随机一个位置
                 direction = rand() % 4;
-                if (choice[direction] == true)
+                if (choice[direction] != 0)
                     break;
             }
             switch (direction) {
@@ -128,7 +128,7 @@ void DFS::solve(Maze A) {
     }
     cout << "END" << endl;
 }
-bool DFS::search_neighbors(int* choice, int current, Maze A, std::vector<int> visited) {
+bool dfs::search_neighbors(int* choice, int current, maze A, std::vector<int> visited) {
     int cur = current;
     if (choice[0]) {  //UP
         cur -= A.column;
@@ -164,7 +164,7 @@ bool DFS::search_neighbors(int* choice, int current, Maze A, std::vector<int> vi
     }
     return (choice[0] | choice[1] | choice[2] | choice[3]);
 }
-void DFS::print_results(Maze A) {
+void dfs::print_results(maze A) {
     int ID = 0;
     const int printnumber = 0;
     // int max_digit = int(log10(row * column)) + 1;

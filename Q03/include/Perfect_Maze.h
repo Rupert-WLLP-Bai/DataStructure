@@ -1,7 +1,7 @@
 #pragma once
 #include <algorithm>
-#include "Maze.h"
-#include "Union_Set.h"
+#include "maze.h"
+#include "union_set.h"
 using namespace std;
 
 /*W = all the wall
@@ -28,16 +28,16 @@ class Perfect_Maze {
    public:
     Perfect_Maze(){};
     ~Perfect_Maze(){};
-    void generate(Maze& A);
+    void generate(maze& A);
     int choose_neighbor(int cur, int row, int column);  //选择cur的邻居
     void print_wall_broken();                           //输出打破的墙
-    void translate(Maze& A);                            //翻译wall的内容到Maze里
+    void translate(maze& A);                            //翻译wall的内容到Maze里
 };
 
-void Perfect_Maze::generate(Maze& A) {
+void Perfect_Maze::generate(maze& A) {
     int Total = A.column * A.row;
     int count = 0;
-    Union_Set U(Total);
+    union_set U(Total);
 
     // vector<int> Visited;    //已被访问的id
     // vector<int> N_Visited;  //未被访问id
@@ -93,7 +93,7 @@ void Perfect_Maze::generate(Maze& A) {
     //         //cout << "-------------------------------------删除结束---------------------------------------" << endl;
     //     }
     // }
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
     while (1) {
         if (count == Total - 1)
             break;
@@ -157,7 +157,7 @@ void Perfect_Maze::print_wall_broken() {
     cout << endl;
 }
 
-void Perfect_Maze::translate(Maze& A) {
+void Perfect_Maze::translate(maze& A) {
     int cur_x, cur_y, neighbor_x, neighbor_y;
     for (unsigned i = 0; i < wall.size(); i++) {
         cur_x = wall[i].first / A.column;

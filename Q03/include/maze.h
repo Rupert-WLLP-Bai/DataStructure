@@ -1,4 +1,4 @@
-//Maze.h 迷宫
+//maze.h 迷宫
 #pragma once
 #include <stdlib.h>
 #include <cmath>
@@ -50,7 +50,7 @@ bool operator!=(const Node& A, const Node& B) {
     else
         return false;
 }
-class Maze {
+class maze {
    private:
     Node start;                                                           //入口
     Node end;                                                             //出口
@@ -78,18 +78,18 @@ class Maze {
     }
 
    public:
-    Maze(int R = 10, int C = 10) { init(R, C); };
-    ~Maze(){};
+    maze(int R = 10, int C = 10) { init(R, C); };
+    ~maze(){};
     void print_node_position();  //输出坐标位置
     void print_node_num();       //输出序号
     void print_node_all();       //打印所有信息(先存取一行的内容再打印)
     void print_the_wall();       //输出墙
     void print_visited();
     void reset();  //重置
-    friend class DFS;
+    friend class dfs;
     friend class Perfect_Maze;
 };
-void Maze::print_node_position() {
+void maze::print_node_position() {
     vector<Node>::iterator it;
     vector<vector<Node>>::iterator iter;
     vector<Node> vec_tmp;
@@ -103,7 +103,7 @@ void Maze::print_node_position() {
         cout << endl;
     }
 }
-void Maze::print_node_num() {
+void maze::print_node_num() {
     vector<Node>::iterator it;
     vector<vector<Node>>::iterator iter;
     vector<Node> vec_tmp;
@@ -118,7 +118,7 @@ void Maze::print_node_num() {
         cout << endl;
     }
 }
-void Maze::print_the_wall() {
+void maze::print_the_wall() {
     vector<Node> Line;  //一行的节点内容
     for (int i = 0; i < row; i++) {
         Line.clear();
@@ -130,7 +130,7 @@ void Maze::print_the_wall() {
              << endl;
     }
 }
-void Maze::print_node_all() {
+void maze::print_node_all() {
     int ID = 0;
     const int printnumber = 1;
     // int max_digit = int(log10(row * column)) + 1;
@@ -171,7 +171,7 @@ void Maze::print_node_all() {
         cout << "█";  //输出最后一行
     cout << endl;
 }
-bool Maze::search_neighbors(Node node) {  //搜索node的邻接节点是否都被访问
+bool maze::search_neighbors(Node node) {  //搜索node的邻接节点是否都被访问
     int value[4] = {1, 1, 1, 1};          //四个方向 按顺序是上下左右 默认为1 已访问
     bool flag;                            //返回值 0表示有未访问的节点 1表示当前节点退栈
     int x = node._x;
@@ -227,7 +227,7 @@ bool Maze::search_neighbors(Node node) {  //搜索node的邻接节点是否都�
     flag = value[0] & value[1] & value[2] & value[3];  //成真赋值为1111
     return flag;
 }
-void Maze::break_the_wall(Node A, int direcion) {  //拆墙
+void maze::break_the_wall(Node A, int direcion) {  //拆墙
     int x = A._x;
     int y = A._y;
 
@@ -250,7 +250,7 @@ void Maze::break_the_wall(Node A, int direcion) {  //拆墙
             break;
     }
 }
-void Maze::print_visited() {
+void maze::print_visited() {
     for (int i = 0; i < row; i++) {
         cout << "#" << setw(3) << i + 1 << " ";
         for (int j = 0; j < column; j++) {
@@ -259,7 +259,7 @@ void Maze::print_visited() {
         cout << endl;
     }
 }
-void Maze::reset() {
+void maze::reset() {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < column; j++) {
             map[i][j]._down = false;
@@ -269,7 +269,7 @@ void Maze::reset() {
             map[i][j]._visited = false;
         }
     }
-    cout << "Maze rested" << endl;
+    cout << "maze rested" << endl;
 }
 void example_output() {
     cout << "Example Output: " << endl;

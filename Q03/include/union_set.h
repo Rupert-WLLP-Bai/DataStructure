@@ -1,18 +1,18 @@
 //并查集实现
 #pragma once
-class Union_Set {
+class union_set {
    private:
     int* pre;   //存储每个结点的前驱结点
     int* rank;  //树的高度
     int n;      //元素个数
    public:
-    Union_Set(int N) {
+    union_set(int N) {
         n = N;
         pre = new int[N];
         rank = new int[N];
         init(N);
     };
-    ~Union_Set() {
+    ~union_set() {
         delete[] rank;
         delete[] pre;
     };
