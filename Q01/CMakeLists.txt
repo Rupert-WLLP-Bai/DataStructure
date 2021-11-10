@@ -1,7 +1,7 @@
 # cmake最低版本
 cmake_minimum_required(VERSION 3.8)
 # 命名项目
-project("ExamRegistrationSystem")
+project(ExamRegistrationSystem VERSION 1.0.3)
 # 添加源文件
 file(GLOB_RECURSE SRC_DIR_LIST "src/*.cpp")
 # 添加头文件
