@@ -10,4 +10,4 @@ include_directories(../templates)
 # 添加生成可执行文件
 add_executable(GenealogyManagementSystem ${SRC_DIR_LIST})
 # 设置版本号
-set_target_properties(GenealogyManagementSystem PROPERTIES VERSION v0.1.0)
+set_target_properties(GenealogyManagementSystem PROPERTIES VERSION v1.0.0)

@@ -151,6 +151,11 @@ void Brother_list::Divorce_member() {
     cout << "要解散家庭的人是：" << p->name << endl;
     Show_child(p);  //分情况讨论解散家庭成员，主要分为是否有前兄弟和后兄弟
     try {
+        /*为根节点*/
+        if (p->father == NULL) {
+            cout << "不能删除根节点，请使用更名操作" << endl;
+            return;
+        }
         if (p->brother_pre && p->brother_next) {
             p->brother_pre->brother_next = p->brother_next;
             p->brother_next->brother_pre = p->brother_pre;
