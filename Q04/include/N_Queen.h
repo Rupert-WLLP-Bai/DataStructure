@@ -21,6 +21,7 @@ v1.0.1 2021年10月25日22:27:39
 #pragma once
 #include <cmath>
 #include <iomanip>
+#include <iomanip>
 #include <iostream>
 using namespace std;
 
@@ -68,11 +69,11 @@ inline void N_Queen::solve_Recursive(int N) {
         if (judge(N)) {
             /*到达最后一层，输出结果*/
             if (N == max - 1) {
-                printf("第%10d种情况：", ++count);
+                cout << "Case " << setw(10) << ++count<<"  ";
                 /*打印情况*/
                 for (int i = 0; i < max; ++i)
-                    printf("%2d ", array[i] + 1);
-                printf("\n");
+                    cout << setw(2) << array[i] + 1<<" ";
+                cout << endl;
             }
             /*未到达最后一层，向下搜索*/
             else {
@@ -98,10 +99,10 @@ inline void N_Queen::solve_noRecursive() {
             array[k] += 1;                     //将皇后列下移一位
         if (array[k] < n) {                    //皇后摆放位置没有到达列最底部
             if (k == (n - 1)) {                //k==n-1表示，max列皇后全部摆放完毕
-                printf("第%10d种情况：", ++count);
+                cout << "Case " << setw(10) << ++count<<"  ";
                 for (int i = 0; i < n; ++i)  //打印情况
-                    printf("%2d ", array[i] + 1);
-                printf("\n");
+                    cout << setw(2) << array[i] + 1<<" ";
+                cout << endl;
             } else {            //皇后还未摆放完毕
                 k += 1;         //继续摆放下一列
                 array[k] = -1;  //此行初始化a[k] = -1;表示第k列，从第一行开始摆放皇后
