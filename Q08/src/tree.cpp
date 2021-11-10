@@ -24,7 +24,7 @@ void Tree::A_InputName() {
     cin >> num;
     cout << "请依次输入顶点的名称:" << endl;
 
-    for (int i = 0; i < num; i++) {
+    for (size_t i = 0; i < num; i++) {
         cin >> temp;
         name.push_back(make_pair(temp, i));
     }
@@ -44,13 +44,13 @@ void Tree::B_InputMap() {
     }
 
     map = new int*[num];
-    for (int i = 0; i < num; i++)
+    for (size_t i = 0; i < num; i++)
         map[i] = new int[num];
 
-    for (int i = 0; i < num - 1; i++) {
+    for (size_t i = 0; i < num - 1; i++) {
         cout << "请输入给出的两个顶点间的距离，不存在距离则输入-1: ";
         map[i][i] = 0;
-        for (int k = i + 1; k < num; k++) {
+        for (size_t k = i + 1; k < num; k++) {
             cout << name[i].first << " ";
             cout << name[k].first << " ";
             cin >> map[i][k];
@@ -61,8 +61,8 @@ void Tree::B_InputMap() {
         }
     }
 
-    for (int i = 0; i < num; i++) {
-        for (int k = 0; k < i; k++) {
+    for (size_t i = 0; i < num; i++) {
+        for (size_t k = 0; k < i; k++) {
             map[i][k] = map[k][i];
         }
     }
@@ -79,7 +79,7 @@ void Tree::C_buildTree() {
     int flag = 0;
     cout << "请输入起始顶点：";
     cin >> tempname;
-    for (int i = 0; i < name.size(); i++) {
+    for (size_t i = 0; i < name.size(); i++) {
         if (tempname == name[i].first) {
             store.push_back(name[i]);
             break;
@@ -88,15 +88,15 @@ void Tree::C_buildTree() {
     while (store.size() < num) {
         min = 100000;
         //遍历
-        for (int i = 0; i < store.size(); i++) {
-            for (int k = 0; k < num; k++) {
+        for (size_t i = 0; i < store.size(); i++) {
+            for (size_t k = 0; k < num; k++) {
                 if (k == store[i].second)
                     continue;
                 que.push(make_pair(map[store[i].second][k], make_pair(store[i].second, k)));
             }
         }
         //加入
-        for (int i = 0; i < name.size(); i++) {
+        for (size_t i = 0; i < name.size(); i++) {
             if (que.top().second.second == name[i].second) {
                 store.push_back(name[i]);
                 ans.push_back(make_pair(que.top().second.first, que.top().second.second));
@@ -112,8 +112,8 @@ void Tree::C_buildTree() {
 void Tree::D_print() {
     string name1, name2;
     cout << "最小生成树的顶点以及边为：" << endl;
-    for (int i = 0; i < ans.size(); i++) {
-        for (int k = 0; k < name.size(); k++) {
+    for (size_t i = 0; i < ans.size(); i++) {
+        for (size_t k = 0; k < name.size(); k++) {
             if (ans[i].first == name[k].second)
                 name1 = name[k].first;
             if (ans[i].second == name[k].second)

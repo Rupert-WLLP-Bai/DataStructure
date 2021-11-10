@@ -6,7 +6,7 @@ using namespace std;
 class Tree {
    private:
     int** map;                        //地图
-    int num;                          //节点数目
+    size_t num;                          //节点数目
     vector<pair<string, int> > name;  //节点名和对应的序号
     vector<pair<int, int> > ans;      //最小生成树序列
    public:
