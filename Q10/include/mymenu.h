@@ -87,7 +87,7 @@ void get_input(int& ret, int min, int max, const char* prompt = "") {
 
 void fetch_choice(int* arr) {
     int ret;
-    string NAME[10] = {"Exit", "Bubble_sort", "Selection_sort", "Insertion_sort", "Quick_sort", "Shell_sort", "Heap_sort", "Merge_sort", "Radix_sort"};
+    string NAME[10] = {"Exit", "Bubble_sort", "Selection_sort", "Insertion_sort", "Shell_sort", "Quick_sort", "Heap_sort", "Merge_sort", "Radix_sort"};
     get_input(ret, 0, 8, "选择操作 : ");  //0~8的输入
     cout << NAME[ret] << endl;
     switch (ret) {
