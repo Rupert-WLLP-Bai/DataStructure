@@ -67,6 +67,7 @@ class dfs {
 
    private:
     deque<int> solution;
+    deque<int> way;
 };
 void dfs::get_choice(int* choice, int current, maze A) {
     Node L = A.map[current / A.column][current % A.column];
@@ -83,6 +84,7 @@ void dfs::solve(maze A) {
     int current = A.start._x * A.column + A.start._y;
     visited.push_back(current);                                     //起点标记
     solution.push_back(A.start._x * A.column + A.start._y);         //放入起点
+    way.push_back(A.start._x * A.column + A.start._y);              //放入起点
     while (solution.back() != A.end._x * A.column + A.end._y) {     //走到终点
         get_choice(choice, current, A);                             //获取节点可以走的位置
         bool flag = search_neighbors(choice, current, A, visited);  //搜索邻接节点的访问情况
@@ -106,13 +108,16 @@ void dfs::solve(maze A) {
                     current += 1;
                     break;
             }
+            way.push_back(current);
             solution.push_back(current);
             visited.push_back(current);
         } else {
             solution.pop_back();
             current = solution.back();
+            way.push_back(current);
         }
     }
+    cout << endl;
 
     // // 输出到文件
     // ofstream output;
@@ -122,11 +127,20 @@ void dfs::solve(maze A) {
     //     solution.pop_front();
     // }
     // output << "END" << endl;
+
+    cout << "尝试路径" << endl;
+    while (way.size()) {
+        cout << hex << way.front() << " -> ";
+        way.pop_front();
+    }
+    cout << "终点" << endl;
+    cout << "--------------------------------" << endl;
+    cout << "迷宫的解" << endl;
     while (solution.size()) {
         cout << hex << solution.front() << " -> ";
         solution.pop_front();
     }
-    cout << "END" << endl;
+    cout << "终点" << endl;
 }
 bool dfs::search_neighbors(int* choice, int current, maze A, std::vector<int> visited) {
     int cur = current;
