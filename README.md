@@ -1,16 +1,20 @@
 # 数据结构课程设计
 
 ## 使用
+
+
 ### Windows
-mkdir build \
-cd build \
-cmake .. -G "MinGW Makefiles" \
+mkdir build
+cd build
+cmake .. -G "MinGW Makefiles"
 mingw32-make
 
 ### Linux
-mkdir build \
-cd build \
-cmake .. -G "Unix Makefiles" \
+./test.sh
+
+mkdir build
+cd build
+cmake .. -G "Unix Makefiles"
 make
 
 ## templates
@@ -19,3 +23,4 @@ make
 ### queue
 ### vector
 ### binTree
+
