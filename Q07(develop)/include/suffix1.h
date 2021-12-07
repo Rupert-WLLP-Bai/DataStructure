@@ -6,6 +6,7 @@
  ************************************************************************/
 
 #include <iostream>
+#include <regex>
 #include <stack>
 #include <string>
 #include <vector>
