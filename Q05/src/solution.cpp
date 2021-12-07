@@ -95,33 +95,33 @@ void read_file(trie<26, IndexClass>& t, string route) {
     }
 }
 
-/**
- * @brief 根据字典随机生成文件
- * @param  n                
- * @return string - 生成的字符串 
- */
-string random_gen(int64_t n) {
-    srand(unsigned(time(NULL)));
-    string res;
-    string words;
-    vector<string> dictionary;
-    ifstream in("test_words.txt");
-    while (!in.eof()) {
-        in >> words;
-        dictionary.push_back(words);
-    }
-    size_t size = dictionary.size();
-    for (size_t i = 0; i < size; i++) {
-        cout << "ID" << i << ": " << dictionary[i] << endl;
-    }
-    for (size_t i = 0; i < n; i++) {
-        res += dictionary[rand() % size] + ",";
-    }
-    cout << "---------- 源 文 件 ----------" << endl;
-    cout << res << endl;
-    cout << n << endl;
-    return res;
-}
+// /**
+//  * @brief 根据字典随机生成文件
+//  * @param  n                
+//  * @return string - 生成的字符串 
+//  */
+// string random_gen(int64_t n) {
+//     srand(unsigned(time(NULL)));
+//     string res;
+//     string words;
+//     vector<string> dictionary;
+//     ifstream in("test_words.txt");
+//     while (!in.eof()) {
+//         in >> words;
+//         dictionary.push_back(words);
+//     }
+//     size_t size = dictionary.size();
+//     for (size_t i = 0; i < size; i++) {
+//         cout << "ID" << i << ": " << dictionary[i] << endl;
+//     }
+//     for (size_t i = 0; i < n; i++) {
+//         res += dictionary[rand() % size] + ",";
+//     }
+//     cout << "---------- 源 文 件 ----------" << endl;
+//     cout << res << endl;
+//     cout << n << endl;
+//     return res;
+// }
 
 /**
  * @brief 遍历方式
