@@ -21,6 +21,7 @@ v1.0.0 2021年10月26日16:35:17
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
+#include <cstring>
 #include <iomanip>
 #include <iostream>
 
@@ -86,7 +87,7 @@ void test_sort::generate(int* arr, int n, int range) {
         print_arr(arr);
 }
 
-//namespace sort_laobai的实现 只考虑整数的s实现
+// namespace sort_laobai的实现 只考虑整数的s实现
 //交换
 void sort_laobai::swap(int& a, int& b) {
     int temp = a;
@@ -95,14 +96,12 @@ void sort_laobai::swap(int& a, int& b) {
 }
 //赋值
 void sort_laobai::assign(int* num, int* arr, int N) {
-    for (int i = 0; i < N; i++) {
-        arr[i] = num[i];
-    }
+    memcpy(arr, num, sizeof(int) * N);
 }
 
 //八种排序(10种)
 
-//1.冒泡排序
+// 1.冒泡排序
 void sort_laobai::Bubble_sort(int* _arr) {
     //算出*arr中N的值
     int* p = _arr;
@@ -140,8 +139,8 @@ void sort_laobai::Bubble_sort(int* _arr) {
     cout << "--------------------冒泡排序的结果-------------------" << endl;
     cout << "Time  :" << T.elapsed() << "  μs" << endl;
     cout << "Count :" << count << endl;
-    //if (N < 100)
-    //print_arr(arr);
+    // if (N < 100)
+    // print_arr(arr);
     cout << "---------------------------------------------------" << endl;
 #else
     clock_gettime(CLOCK_MONOTONIC, &t2);
@@ -149,14 +148,14 @@ void sort_laobai::Bubble_sort(int* _arr) {
     cout << "--------------------冒泡排序的结果-------------------" << endl;
     cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
     cout << "Count :" << count << endl;
-    //print_arr(arr);
+    // print_arr(arr);
     cout << "-----------------------------------------------------" << endl;
 #endif
     //释放
     delete[] arr;
 }
 
-//2.选择排序
+// 2.选择排序
 void sort_laobai::Selection_sort(int* _arr) {
     //算出*arr中N的值
     int* p = _arr;
@@ -202,7 +201,7 @@ void sort_laobai::Selection_sort(int* _arr) {
     cout << "Time  :" << T.elapsed() << "  μs" << endl;
     cout << "Count :" << count << endl;
     // if (N < 100)
-    //print_arr(arr);
+    // print_arr(arr);
     cout << "---------------------------------------------------" << endl;
 #else
     clock_gettime(CLOCK_MONOTONIC, &t2);
@@ -210,13 +209,13 @@ void sort_laobai::Selection_sort(int* _arr) {
     cout << "--------------------选择排序的结果-------------------" << endl;
     cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
     cout << "Count :" << count << endl;
-    //print_arr(arr);
+    // print_arr(arr);
     cout << "-----------------------------------------------------" << endl;
 #endif
     //释放
     delete[] arr;
 }
-//3.直接插入排序
+// 3.直接插入排序
 void sort_laobai::Insertion_sort(int* _arr) {
     //算出*arr中N的值
     int* p = _arr;
@@ -264,14 +263,14 @@ void sort_laobai::Insertion_sort(int* _arr) {
     cout << "--------------------插入排序的结果-------------------" << endl;
     cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
     cout << "Count :" << count << endl;
-    //print_arr(arr);
+    // print_arr(arr);
     cout << "-----------------------------------------------------" << endl;
 #endif
     //释放
     delete[] arr;
 }
 
-//4.希尔排序
+// 4.希尔排序
 void sort_laobai::Shell_sort(int* _arr) {
     //算出*arr中N的值
     int* p = _arr;
@@ -319,13 +318,13 @@ void sort_laobai::Shell_sort(int* _arr) {
     cout << "--------------------希尔排序的结果-------------------" << endl;
     cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
     cout << "Count :" << count << endl;
-    //print_arr(arr);
+    // print_arr(arr);
     cout << "-----------------------------------------------------" << endl;
 #endif
     //释放
     delete[] arr;
 }
-//4.希尔排序的插入(返回值为count的增量)
+// 4.希尔排序的插入(返回值为count的增量)
 int64_t sort_laobai::Shell_insert(int* arr, int begin, int gap, int N) {
     int64_t count = 0;
     for (int i = begin + gap; i < N; i += gap) {
@@ -340,7 +339,7 @@ int64_t sort_laobai::Shell_insert(int* arr, int begin, int gap, int N) {
     return count;
 }
 
-//5.快速排序
+// 5.快速排序
 void sort_laobai::Quick_sort(int* _arr) {
     //算出*arr中N的值
     int* p = _arr;
@@ -380,13 +379,13 @@ void sort_laobai::Quick_sort(int* _arr) {
     cout << "--------------------快速排序的结果-------------------" << endl;
     cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
     cout << "Count :" << count << endl;
-    //print_arr(arr);
+    // print_arr(arr);
     cout << "----------------------------------------------------" << endl;
 #endif
     //释放
     delete[] arr;
 }
-//5.快速排序递归
+// 5.快速排序递归
 int64_t sort_laobai::Q_Sort(int left, int right, int* arr) {
     static int64_t count = 0;
     if (left >= right)
@@ -412,7 +411,7 @@ int64_t sort_laobai::Q_Sort(int left, int right, int* arr) {
     return count;
 }
 
-//6.堆排序
+// 6.堆排序
 void sort_laobai::Heap_sort(int* _arr) {
     //算出*arr中N的值
     int* p = _arr;
@@ -436,9 +435,9 @@ void sort_laobai::Heap_sort(int* _arr) {
     clock_gettime(CLOCK_MONOTONIC, &t1);
 #endif
     //排序
-    //1.构造大顶堆
+    // 1.构造大顶堆
     count += adjustHeap(arr, 0, N);
-    //2.交换循环
+    // 2.交换循环
     for (int i = N - 1; i > 0; i--) {
         sort_laobai::swap(arr[0], arr[i]);
         count++;
@@ -459,13 +458,13 @@ void sort_laobai::Heap_sort(int* _arr) {
     cout << "---------------------堆排序的结果--------------------" << endl;
     cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
     cout << "Count :" << count << endl;
-    //print_arr(arr);
+    // print_arr(arr);
     cout << "-----------------------------------------------------" << endl;
 #endif
     //释放
     delete[] arr;
 }
-//6.调整堆
+// 6.调整堆
 int64_t sort_laobai::adjustHeap(int* arr, int i, int n) {
     int64_t count = 0;
     int parent = i;         // 父节点下标
@@ -484,7 +483,7 @@ int64_t sort_laobai::adjustHeap(int* arr, int i, int n) {
     return count;
 }
 
-//7.二路归并排序
+// 7.二路归并排序
 void sort_laobai::Merge_sort(int* _arr) {
     //算出*arr中N的值
     int* p = _arr;
@@ -524,7 +523,7 @@ void sort_laobai::Merge_sort(int* _arr) {
     cout << "--------------------归并排序的结果-------------------" << endl;
     cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
     cout << "Count :" << count << endl;
-    //print_arr(arr);
+    // print_arr(arr);
     cout << "-----------------------------------------------------" << endl;
 #endif
     //释放
@@ -582,7 +581,7 @@ void sort_laobai::MergeSort(int* A, int n, int64_t& count) {
     delete[] L;
 }
 
-//8.基数排序
+// 8.基数排序
 void sort_laobai::Radix_sort(int* _arr) {
     //算出*arr中N的值
     int* p = _arr;
@@ -622,7 +621,7 @@ void sort_laobai::Radix_sort(int* _arr) {
     cout << "--------------------基数排序的结果-------------------" << endl;
     cout << "Time  :" << deltaT << " ns = " << double(deltaT / pow(10, 6)) << " ms" << endl;
     cout << "Count :" << count << endl;
-    //print_arr(arr);
+    // print_arr(arr);
     cout << "-----------------------------------------------------" << endl;
 #endif
     //释放
@@ -658,7 +657,7 @@ void sort_laobai::radixsort(int* data, int n) {
     delete[] tmp;
     delete[] count;
 }
-//8.基数排序求最大位数
+// 8.基数排序求最大位数
 int sort_laobai::max_bit(int* arr, int N) {
     int max = arr[0];
     int bit = 0;
@@ -670,4 +669,4 @@ int sort_laobai::max_bit(int* arr, int N) {
     return bit;
 }
 
-//2021年11月5日10:30:26
+// 2021年11月5日10:30:26
