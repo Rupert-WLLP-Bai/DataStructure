@@ -43,7 +43,7 @@ class Joseph {
             List.insert(0, i);  //初始化
         }
     }
-    ~Joseph(){};   //析构函数
+    ~Joseph()= default;   //析构函数
     void solve();  //解决Joseph问题，结果储存在List和Del中
 };
 
@@ -62,7 +62,7 @@ void Joseph::solve() {
     while (i--)                                   //定位到起始位置
         current = current->Link;
     while (count) {
-        for (int i = 0; i < gap; i++) {
+        for (int j = 0; j < gap; j++) {
             if (current == List.getHead()) {
                 current = current->Link;
                 pos = 0;

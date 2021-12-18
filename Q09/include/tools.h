@@ -9,7 +9,7 @@ using namespace std;
 #define INSERT 2
 #define SEARCH 3
 #define QUIT 4
-#define PRINT 5
+
 //菜单
 void print_menu();
 //获取选择
@@ -32,7 +32,7 @@ void print_menu() {
 
 int fetch_choice() {
     int choice;
-    while (1) {
+    while (true) {
         cin >> choice;
         if (cin.fail()) {
             cin.clear();
@@ -45,7 +45,7 @@ int fetch_choice() {
             continue;
         } else if (choice == CLEAR) {
 #ifdef _WIN32
-            int res = system("cls");
+            system("cls");
 #else
             int res = system("clear");
 #endif

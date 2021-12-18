@@ -1,5 +1,5 @@
 /*
-@file:        mymenu.h
+@file:        menu.h
 @description: 菜单函数
 @version:     v1.0.0
 @author:      Laobai
@@ -25,7 +25,7 @@ using namespace std;
 //输出菜单
 void print_menu();
 //获取操作
-void fetch_choice(int* arr);
+bool fetch_choice(int* arr);
 //主循环
 void mainloop();
 //获取输入
@@ -66,14 +66,14 @@ void print_menu() {
 
 void input(int*& arr) {
     int num, range;
-    get_input(num, 0, INT32_MAX, "输入随机数的数量 : ");
-    get_input(range, 1, INT32_MAX, "输入随机数的上限 : ");
+    get_input(num, 0, INT32_MAX, "输入随机数的数量(0 ~ 2147483647) : ");
+    get_input(range, 1, INT32_MAX, "输入随机数的上限(1 ~ 2147483647) : ");
     arr = new int[num];
     generate(arr, num, range);
 }
 
 void get_input(int& ret, int min, int max, const char* prompt = "") {
-    while (1) {
+    while (true) {
         cout << prompt;
         cin >> ret;
         if (cin.fail() || ret < min || ret > max) {
@@ -85,15 +85,17 @@ void get_input(int& ret, int min, int max, const char* prompt = "") {
     }
 }
 
-void fetch_choice(int* arr) {
+bool fetch_choice(int* arr) {
     int ret;
     string NAME[10] = {"Exit", "Bubble_sort", "Selection_sort", "Insertion_sort", "Shell_sort", "Quick_sort", "Heap_sort", "Merge_sort", "Radix_sort"};
     get_input(ret, 0, 8, "选择操作 : ");  //0~8的输入
     cout << NAME[ret] << endl;
+    bool exit_flag = false;
     switch (ret) {
         case 0:  //退出
             delete[] arr;
-            exit(0);
+            exit_flag = true;
+            break;
         case 1:  //冒泡排序
             Bubble_sort(arr);
             break;
@@ -118,19 +120,24 @@ void fetch_choice(int* arr) {
         case 8:  //基数排序
             Radix_sort(arr);
             break;
+        default:
+            throw runtime_error("参数错误");
     }
+    return exit_flag;
 }
 
 void mainloop() {
     int* arr = nullptr;  //需要初始化
     int i = 1;
-    while (1) {
+    while (true) {
         if (i) {
             print_menu();
             input(arr);
             i = 0;
         }
-        fetch_choice(arr);
+        if(fetch_choice(arr)){
+            return;
+        }
     }
 }
 

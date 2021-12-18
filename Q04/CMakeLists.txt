@@ -8,6 +8,6 @@ file(GLOB_RECURSE SRC_DIR_LIST "src/*.cpp")
 include_directories(./include)
 include_directories(../templates)
 # 添加生成可执行文件
-add_executable(NQueens ${SRC_DIR_LIST})
+add_executable(Question04-NQueens ${SRC_DIR_LIST})
 # 设置版本号
-set_target_properties(NQueens PROPERTIES VERSION v1.0.2)
+set_target_properties(Question04-NQueens PROPERTIES VERSION v1.0.2)

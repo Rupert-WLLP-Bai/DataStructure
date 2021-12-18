@@ -67,10 +67,10 @@ void suffix(string expression){
 	tree(suffix_exp);
 }
 stack<TreeNode *> nodeStack;    //后缀表达式转成的二叉树
-void tree(string suffix_exp){
+void tree(const string& suffix_exp){
 	char ch;
-	for(int iX=0;iX<suffix_exp.size();iX++){ 
-		ch = suffix_exp[iX];		//遍历后缀表达式每个字符，数字直接入栈，运算符创建二叉树节点
+	for(char iX : suffix_exp){
+		ch = iX;		//遍历后缀表达式每个字符，数字直接入栈，运算符创建二叉树节点
 		TreeNode *pNode = CreateTreeNode(ch);
 		if (ch == '+' || ch == '-' || ch == '*' || ch == '/')
 		{

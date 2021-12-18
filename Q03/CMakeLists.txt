@@ -8,6 +8,6 @@ file(GLOB_RECURSE SRC_DIR_LIST "src/*.cpp")
 include_directories(./include)
 include_directories(../templates)
 # 添加生成可执行文件
-add_executable(MazeProblem ${SRC_DIR_LIST})
+add_executable(Question03-MazeProblem ${SRC_DIR_LIST})
 # 设置版本号
-set_target_properties(MazeProblem PROPERTIES VERSION v0.1.1)
+set_target_properties(Question03-MazeProblem PROPERTIES VERSION v0.1.1)

@@ -7,5 +7,6 @@ using namespace std;
  * @return vector<string> 拆解后的字符串 
  */
 vector<string> Split(string input) {
-    
+    vector<string> v;
+    return v;
 }

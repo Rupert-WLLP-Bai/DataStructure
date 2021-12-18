@@ -8,6 +8,6 @@ file(GLOB_RECURSE SRC_DIR_LIST "src/*.cpp")
 include_directories(include)
 include_directories(../templates)
 # 添加生成可执行文件
-add_executable(ExpressionCalculation_origin ${SRC_DIR_LIST})
+add_executable(Question07-ExpressionCalculation_origin ${SRC_DIR_LIST})
 # 设置版本号
-set_target_properties(ExpressionCalculation_origin PROPERTIES VERSION v0.0.1)
+set_target_properties(Question07-ExpressionCalculation_origin PROPERTIES VERSION v0.0.1)

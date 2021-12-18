@@ -7,7 +7,6 @@
 */
 
 #include "solution.h"
-#include <ctime>
 #include <string>  //字符串
 #include "trie.h"  //Trie树
 
@@ -25,23 +24,21 @@
  * @param  route            
  */
 void input(string& filename, string& route) {
-    if (1) {
-        cout << "输入文件名" << endl;
-        cin >> filename;
-        route += filename;  //路径
-        ofstream out;       //输入到文件中
-        out.open(route);
-        if (out.fail()) {
-            cerr << "Error" << endl;
-            exit(1);
-        }
-        cin.get();
-        string text;  //输入的文本内容
-        cout << "请输入一段文字" << endl;
-        getline(cin, text);
-        out << text;  //输入到文件中
-        out.close();
+    cout << "输入文件名" << endl;
+    cin >> filename;
+    route += filename;//路径
+    ofstream out;//输入到文件中
+    out.open(route);
+    if (out.fail()) {
+        cerr << "Error" << endl;
+        exit(1);
     }
+    cin.get();
+    string text;//输入的文本内容
+    cout << "请输入一段文字" << endl;
+    getline(cin, text);
+    out << text;//输入到文件中
+    out.close();
 }
 
 /**
@@ -57,7 +54,7 @@ void input_key(string& key) {
  * @brief 显示源文件
  * @param  route            
  */
-void display_src(string route) {
+void display_src(const string& route) {
     int src;
     fstream out;
     out.open(route);
@@ -77,16 +74,17 @@ void display_src(string route) {
  * @param  t                
  * @param  route            
  */
-void read_file(trie<26, IndexClass>& t, string route) {
+void read_file(trie<26, IndexClass>& t, const string& route) {
     ifstream in(route);
     string str;
-    char c;
+    int c;
     while (!in.eof()) {
         c = in.get();
         if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))  //判断有效
-            str += c;
+            str += std::to_string(c);
         else {
-            if (str.size() == 0)
+            //TODO 这一段的逻辑可能有待商榷，大概应该先过滤掉无效字符之后再进行插入
+            if (str.empty())
                 continue;
             //cout << "插入：" << str << endl;
             t.insert(str.begin(), str.end());
@@ -95,33 +93,6 @@ void read_file(trie<26, IndexClass>& t, string route) {
     }
 }
 
-// /**
-//  * @brief 根据字典随机生成文件
-//  * @param  n                
-//  * @return string - 生成的字符串 
-//  */
-// string random_gen(int64_t n) {
-//     srand(unsigned(time(NULL)));
-//     string res;
-//     string words;
-//     vector<string> dictionary;
-//     ifstream in("test_words.txt");
-//     while (!in.eof()) {
-//         in >> words;
-//         dictionary.push_back(words);
-//     }
-//     size_t size = dictionary.size();
-//     for (size_t i = 0; i < size; i++) {
-//         cout << "ID" << i << ": " << dictionary[i] << endl;
-//     }
-//     for (size_t i = 0; i < n; i++) {
-//         res += dictionary[rand() % size] + ",";
-//     }
-//     cout << "---------- 源 文 件 ----------" << endl;
-//     cout << res << endl;
-//     cout << n << endl;
-//     return res;
-// }
 
 /**
  * @brief 遍历方式
@@ -136,7 +107,7 @@ class StringExe {
 //主程序
 void solution() {
     string filename;         //文件名
-    string route = "";       //文件路径文件夹
+    string route;       //文件路径文件夹
     string key;              //关键词
     trie<26, IndexClass> t;  //Trie树
     input(filename, route);  //输入文件名以及文件内容
@@ -148,5 +119,5 @@ void solution() {
     display_src(route);  //输出源文件
     /*查找结果*/
     cout << "---------- 查 找 结 果 ----------" << endl;
-    cout << key << ": " << t.getfreq(key.c_str()) << endl;
+    cout << key << ": " << t.getFrequency(key.c_str()) << endl;
 }

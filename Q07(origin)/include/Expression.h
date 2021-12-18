@@ -20,4 +20,4 @@ int get_op(char c);                          //判断运算符优先级
 void PreOrder(stack<TreeNode *> subTree);     //前序遍历，三种遍历方式均使用递归
 void InOrder(stack<TreeNode *> subTree);		//中序遍历
 void PostOrder(stack<TreeNode *> subTree);		//后序遍历
-void tree(string suffix_exp);				//由后缀表达式得到二叉树
+void tree(const string& suffix_exp);				//由后缀表达式得到二叉树

@@ -24,7 +24,7 @@ class stop_watch {
         : elapsed_(0) {
         QueryPerformanceFrequency(&freq_);
     }
-    ~stop_watch() {}
+    ~stop_watch() = default;
 
    public:
     void start() {
@@ -40,21 +40,21 @@ class stop_watch {
         start();
     }
     //微秒
-    double elapsed() {
+    double elapsed() const {
         return static_cast<double>(elapsed_);
     }
     //毫秒
-    double elapsed_ms() {
-        return elapsed_ / 1000.0;
+    double elapsed_ms() const {
+        return static_cast<double>(elapsed_ / 1000.0);
     }
     //秒
-    double elapsed_second() {
+    double elapsed_second() const {
         return elapsed_ / 1000000.0;
     }
 
    private:
-    LARGE_INTEGER freq_;
-    LARGE_INTEGER begin_time_;
+    LARGE_INTEGER freq_{};
+    LARGE_INTEGER begin_time_{};
     long long elapsed_;
 };
 

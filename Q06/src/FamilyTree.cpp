@@ -3,8 +3,8 @@
 #include <string>
 #include "tool.h"
 using namespace std;
-Family* Brother_list::Find_member(string name, Family* key) {
-    Family *p = key, *ans = NULL, *temp = p;
+Family* Brother_list::Find_member(const string& name, Family* key) {
+    Family *p = key, *ans = nullptr, *temp = p;
     if (p->name == name)  //恰好传入函数的家庭成员key即是所找的成员名字
         return p;
     while (temp->brother_next) {  //在兄弟指针中不断递归寻找
@@ -21,22 +21,20 @@ Family* Brother_list::Find_member(string name, Family* key) {
 Brother_list::Brother_list() {  //构造函数
     ancestor = new Family;
     ancestor->name = "";
-    ancestor->ichild = 0;
-    ancestor->father = NULL;
-    ancestor->child = NULL;
-    ancestor->brother_pre = NULL;
-    ancestor->brother_next = NULL;
+    ancestor->child_num = 0;
+    ancestor->father = nullptr;
+    ancestor->child = nullptr;
+    ancestor->brother_pre = nullptr;
+    ancestor->brother_next = nullptr;
 }
 Family* Brother_list::Member_create() {  //创建新的家庭成员并初始化
-    Family* p = new Family;
-
-    p = new Family;
+    auto* p = new Family;
     p->name = "";
-    p->ichild = 0;
-    p->father = NULL;
-    p->child = NULL;
-    p->brother_pre = NULL;
-    p->brother_next = NULL;
+    p->child_num = 0;
+    p->father = nullptr;
+    p->child = nullptr;
+    p->brother_pre = nullptr;
+    p->brother_next = nullptr;
 
     return p;
 }
@@ -47,8 +45,8 @@ void Brother_list::destroy(Family* p) {  //递归删除家庭成员，与寻找�
     }
     while (temp->brother_pre) {
         temp = temp->brother_pre;
-        temp->brother_next->brother_pre = NULL;
-        temp->brother_next->brother_next = NULL;
+        temp->brother_next->brother_pre = nullptr;
+        temp->brother_next->brother_next = nullptr;
         destroy(temp->brother_next);
     }
     if (temp->child)
@@ -56,13 +54,13 @@ void Brother_list::destroy(Family* p) {  //递归删除家庭成员，与寻找�
     delete p;
 }
 void Brother_list::Show_child(Family* parent) {
-    if (parent->ichild == 0) {  //该家庭成员没有孩子
+    if (parent->child_num == 0) {  //该家庭成员没有孩子
         cout << parent->name << "没有后代" << endl;
         return;
     }
     Family* temp = parent->child;
     cout << parent->name << "的第一代子孙是:";  //展示子孙
-    for (int i = 0; i < parent->ichild; i++) {
+    for (int i = 0; i < parent->child_num; i++) {
         cout << temp->name << "   ";
         if (temp->brother_next)
             temp = temp->brother_next;
@@ -74,24 +72,24 @@ void Brother_list::Establish_family() {
     cout << "请输入要建立家庭的人的姓名：";
     cin >> name;
     Family* p = Find_member(name, ancestor);
-    if (p == NULL) {
+    if (p == nullptr) {
         cout << "查无此人" << endl;
         return;
     }
-    if (p->child != NULL) {
+    if (p->child != nullptr) {
         cout << p->name << "已经建立过家庭" << endl;
         return;
     }
     cout << "请输入" << p->name << "的儿女人数：";
-    get_input(p->ichild, 0, INT32_MAX);
-    if (p->ichild == 0)
+    get_input(p->child_num, 0, INT32_MAX);
+    if (p->child_num == 0)
         return;
     cout << "请依次输入" << p->name << "的儿女的姓名：";
     p->child = Member_create();
     Family* temp = p->child;
     cin >> temp->name;
     temp->father = p;
-    for (int i = 1; i < p->ichild; i++) {
+    for (int i = 1; i < p->child_num; i++) {
         Family* brother = Member_create();
         cin >> brother->name;
         brother->father = p;
@@ -116,14 +114,14 @@ void Brother_list::Add_member() {
     string name;
     cin >> name;
     Family* p = Find_member(name, ancestor);
-    if (p == NULL) {
+    if (p == nullptr) {
         cout << "查无此人" << endl;
         return;
     }
     cout << "请输入" << name << "新添加的儿子（或女儿）的姓名：";
     Family* child = Member_create();
     child->father = p;
-    p->ichild++;
+    p->child_num++;
     cin >> child->name;
     Family* temp = p;
     temp = temp->child;
@@ -144,7 +142,7 @@ void Brother_list::Divorce_member() {
     string name;
     cin >> name;
     Family* p = Find_member(name, ancestor);
-    if (p == NULL) {
+    if (p == nullptr) {
         cout << "查无此人" << endl;
         return;
     }
@@ -152,27 +150,27 @@ void Brother_list::Divorce_member() {
     Show_child(p);  //分情况讨论解散家庭成员，主要分为是否有前兄弟和后兄弟
     try {
         /*为根节点*/
-        if (p->father == NULL) {
+        if (p->father == nullptr) {
             cout << "不能删除根节点，请使用更名操作" << endl;
             return;
         }
         if (p->brother_pre && p->brother_next) {
             p->brother_pre->brother_next = p->brother_next;
             p->brother_next->brother_pre = p->brother_pre;
-            p->father->ichild--;
+            p->father->child_num--;
         }
         if (p->brother_pre && !p->brother_next) {
-            p->brother_pre->brother_next = NULL;
-            p->father->ichild--;
+            p->brother_pre->brother_next = nullptr;
+            p->father->child_num--;
         }
         if (!p->brother_pre && p->brother_next) {
             p->father->child = p->brother_next;
-            p->brother_next->brother_pre = NULL;
-            p->father->ichild--;
+            p->brother_next->brother_pre = nullptr;
+            p->father->child_num--;
         }
         if (!p->brother_pre && !p->brother_next) {
-            p->father->child = NULL;
-            p->father->ichild--;
+            p->father->child = nullptr;
+            p->father->child_num--;
         }
         if (p->child)
             destroy(p->child);
@@ -187,7 +185,7 @@ void Brother_list::Change_member() {
     string name;
     cin >> name;
     Family* p = Find_member(name, ancestor);
-    if (p == NULL) {
+    if (p == nullptr) {
         cout << "查无此人" << endl;
         return;
     }

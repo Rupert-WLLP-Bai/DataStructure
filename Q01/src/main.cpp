@@ -33,7 +33,7 @@ int main() {
     T.Spawn();
     T.Print();
     /* 进入主循环 */
-    while (1) {
+    while (true) {
         fetch_choice(ret, T);
         if (ret == 0) {
             cout << "退出程序" << endl;

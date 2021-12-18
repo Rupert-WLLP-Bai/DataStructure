@@ -19,7 +19,7 @@ void first_input(binary_search_tree<int>& tree) {
             cout << "第一次只能选择建立操作，输入回车即建立空树,按回车继续" << endl;
             getchar();  //输入回车继续
 #ifdef _WIN32
-            int res = system("cls");
+            system("cls");
 #else
             int res = system("clear");
 #endif
@@ -82,8 +82,8 @@ void other_input(binary_search_tree<int>& tree) {
                     cin.ignore(INT32_MAX, '\n');
                     cout << "输入错误！" << endl;
                     continue;
-                } else if (choice == SEARCH) {
-                    BSNode<int>* val = tree.search_recursion(temp);
+                } else {
+                    BSNode<int> *val = tree.search_recursion(temp);
                     if (val != nullptr)
                         cout << "查找成功" << endl;
                     else

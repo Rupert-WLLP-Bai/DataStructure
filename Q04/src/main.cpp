@@ -60,6 +60,8 @@ int main() {
             break;
         case MULTITHREADING:
             N.solve_Multithreading();
+        default:
+            throw runtime_error("无效参数");
     }
     return 0;
 }
