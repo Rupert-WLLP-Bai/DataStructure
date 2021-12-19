@@ -10,11 +10,11 @@
 update notes:
 
 v1.0.0 2021年9月29日17:55:52
-    TODO in v1.0.1:
+      in v1.0.1:
         1. 加入递归解法
 
 v1.0.1 2021年10月25日22:27:39
-    TODO in v1.0.2:
+      in v1.0.2:
         1. 加入多线程解法(在Java下已实现)
 */
 
@@ -40,7 +40,7 @@ public:
 
     void solve_Recursive();       //递归解法
     void solve_noRecursive();     //非递归解法
-    void solve_Multithreading();  //多线程解法
+    static void solve_Multithreading();  //多线程解法
 };
 
 N_Queen::N_Queen(int max) {

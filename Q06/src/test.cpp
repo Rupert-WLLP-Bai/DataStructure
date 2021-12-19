@@ -5,7 +5,7 @@ int main() {
 #ifdef _WIN32
     system("chcp 65001");
 #endif
-    Brother_list Family_Tree;
+    FamilyMap Family_Tree;
     cout << "**              家谱管理系统              **" << endl;
     cout << "============================================" << endl;
     cout << "**           请选择要执行的操作：         **" << endl;
@@ -16,22 +16,22 @@ int main() {
     cout << "**             E --- 退出程序             **" << endl;
     cout << "============================================" << endl;
     char order;
-    Family_Tree.Family_tree();  //先建立祖先
+    Family_Tree.familyTree();  //先建立祖先
     cin >> order;
     try {
         while (order != 'E') {
             switch (order) {
                 case 'A':
-                    Family_Tree.Establish_family();
+                    Family_Tree.establishFamily();
                     break;
                 case 'B':
-                    Family_Tree.Add_member();
+                    Family_Tree.addMember();
                     break;
                 case 'C':
-                    Family_Tree.Divorce_member();
+                    Family_Tree.divorceMember();
                     break;
                 case 'D':
-                    Family_Tree.Change_member();
+                    Family_Tree.changeMember();
                     break;
                 default:
                     cout << "请输入正确的命令";

@@ -6,7 +6,7 @@ class union_set {
     int* rank;  //树的高度
     int n;      //元素个数
    public:
-    union_set(int N) {
+    explicit union_set(int N) {
         n = N;
         pre = new int[N];
         rank = new int[N];
@@ -16,9 +16,9 @@ class union_set {
         delete[] rank;
         delete[] pre;
     };
-    void init(int n)  //初始化函数，对录入的 n个结点进行初始化
+    void init(int num)  //初始化函数，对录入的 n个结点进行初始化
     {
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < num; i++) {
             pre[i] = i;   //每个结点的上级都是自己
             rank[i] = 1;  //每个结点构成的树的高度为 1
         }

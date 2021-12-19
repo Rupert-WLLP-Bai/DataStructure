@@ -83,7 +83,7 @@ void read_file(trie<26, IndexClass>& t, const string& route) {
         if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))  //判断有效
             str += std::to_string(c);
         else {
-            //TODO 这一段的逻辑可能有待商榷，大概应该先过滤掉无效字符之后再进行插入
+            //  这一段的逻辑可能有待商榷，大概应该先过滤掉无效字符之后再进行插入
             if (str.empty())
                 continue;
             //cout << "插入：" << str << endl;

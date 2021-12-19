@@ -73,7 +73,7 @@ Graphlnk<T, E>::Graphlnk(int sz) {
         cerr << "存储分配失败";
         exit(1);
     }
-};
+}
 template <class T, class E>
 Graphlnk<T, E>::~Graphlnk() {
     //析构函数，释放链接表空间
@@ -86,7 +86,7 @@ Graphlnk<T, E>::~Graphlnk() {
         }
     }
     delete[] NodeTable;  //删除顶点表数组
-};
+}
 
 template <class T, class E>
 int Graphlnk<T, E>::getFirstNeighbor(int v) {  //取顶点v的第一个邻接点
@@ -97,7 +97,7 @@ int Graphlnk<T, E>::getFirstNeighbor(int v) {  //取顶点v的第一个邻接点
             return p->dest;  //存在返回第一个邻接点
     }
     return -1;
-};
+}
 template <class T, class E>
 int Graphlnk<T, E>::getNextNeighbor(int v, int w) {
     //取顶点v的邻接点w的下一个邻接点的位置，若有返回下一个邻接点，否则返回-1。
@@ -109,7 +109,7 @@ int Graphlnk<T, E>::getNextNeighbor(int v, int w) {
         }
     }
     return -1;  //下一个邻接点不存在
-};
+}
 template <class T, class E>
 E Graphlnk<T, E>::getWeight(int v1, int v2) {
     //函数返回边(v1,v2)上的权值, 若该边不在图中, 则函数返回最大整数值。
@@ -121,7 +121,7 @@ E Graphlnk<T, E>::getWeight(int v1, int v2) {
             return p->dest;  //找到
     }
     return maxWeight;  //找不到(v1,v2)，返回最大整数值
-};
+}
 template <class T, class E>
 bool Graphlnk<T, E>::insertVertex(const T& vertex) {
     //在图的顶点表中插入一个新顶点vertex。若插入成功，函数返回true, 否则返回false。
@@ -132,7 +132,7 @@ bool Graphlnk<T, E>::insertVertex(const T& vertex) {
         numVertices++;
         return true;
     }
-};
+}
 template <class T, class E>
 bool Graphlnk<T, E>::removeVertex(int v) {
     //在图中删除一个指定顶点v, v 是顶点号。若删除成功, 函数返回true, 否则返回false。
@@ -172,7 +172,7 @@ bool Graphlnk<T, E>::removeVertex(int v) {
     }
 
     return true;
-};
+}
 
 template <class T, class E>
 bool Graphlnk<T, E>::insertEdge(int v1, int v2, E weight) {
@@ -199,7 +199,7 @@ bool Graphlnk<T, E>::insertEdge(int v1, int v2, E weight) {
         return true;
     }
     return false;
-};
+}
 template <class T, class E>
 bool Graphlnk<T, E>::removeEdge(int v1, int v2) {
     //在图中删除一条边(v1, v2)
@@ -231,4 +231,4 @@ bool Graphlnk<T, E>::removeEdge(int v1, int v2) {
         }
     }
     return false;
-};
+}

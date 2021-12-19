@@ -10,7 +10,7 @@
 update notes:
 
 v1.0.0 2021年10月26日16:35:17
-    TODO in v1.0.1
+      in v1.0.1
         1. rand的范围在Windows和Linux下不同
 */
 
