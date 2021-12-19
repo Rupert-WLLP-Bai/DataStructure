@@ -40,5 +40,8 @@ int main() {
             break;
         }
     }
+#ifdef _WIN32
+    system("pause");
+#endif
     return 0;
 }

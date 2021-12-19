@@ -15,6 +15,9 @@ int main() {
     system("chcp 65001");
 #endif
     Solution::test();
+#ifdef _WIN32
+    system("pause");
+#endif
     return 0;
 }
 
