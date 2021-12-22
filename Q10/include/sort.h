@@ -15,12 +15,9 @@ v1.0.0 2021年10月26日16:35:17
 */
 
 #ifdef _WIN32
-
-#include "stop_watch.h"  //Windows计时器
-
+    #include "stop_watch.h"  //Windows计时器
 #endif
 
-#include <algorithm>
 #include <cmath>
 #include <cstdlib>
 #include <iomanip>
@@ -579,7 +576,7 @@ void sort_laobai::MergeSort(int *A, int n, int64_t &count) {
     for (i = mid; i < n; i++)
         R[i - mid] = A[i];  // creating right subarray
 
-    MergeSort(L, mid, count);               // sorting the left subarray
+    MergeSort(L, mid, count) ;               // sorting the left subarray
     MergeSort(R, n - mid, count);           // sorting the right subarray
     count += Merge(A, L, mid, R, n - mid);  // Merging L and R into A as sorted list.
     // the delete operations is very important

@@ -4,8 +4,9 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
-#include <stack>
+#include "LinkedStack.h"
 #include <vector>
+#include "deque"
 #include "maze.h"
 using namespace std;
 

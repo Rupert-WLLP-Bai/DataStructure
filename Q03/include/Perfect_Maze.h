@@ -26,10 +26,10 @@ class Perfect_Maze {
    private:
     vector<P> wall;  //需要打破的墙
    public:
-    Perfect_Maze(){};
-    ~Perfect_Maze(){};
+    Perfect_Maze()= default;;
+    ~Perfect_Maze()= default;;
     void generate(maze& A);
-    int choose_neighbor(int cur, int row, int column);  //选择cur的邻居
+    static int choose_neighbor(int cur, int row, int column);  //选择cur的邻居
     void print_wall_broken();                           //输出打破的墙
     void translate(maze& A);                            //翻译wall的内容到Maze里
 };
@@ -93,15 +93,15 @@ void Perfect_Maze::generate(maze& A) {
     //         //cout << "-------------------------------------删除结束---------------------------------------" << endl;
     //     }
     // }
-    srand((unsigned int)time(NULL));
-    while (1) {
+    srand((unsigned int)time(nullptr));
+    while (true) {
         if (count == Total - 1)
             break;
         int cur = rand() % Total;
         int neighbor = choose_neighbor(cur, A.row, A.column);
         if (!U.isSame(cur, neighbor)) {
             U.join(cur, neighbor);
-            wall.push_back(P(cur, neighbor));
+            wall.emplace_back(cur, neighbor);
             count++;
         }
     }
@@ -159,11 +159,11 @@ void Perfect_Maze::print_wall_broken() {
 
 void Perfect_Maze::translate(maze& A) {
     int cur_x, cur_y, neighbor_x, neighbor_y;
-    for (unsigned i = 0; i < wall.size(); i++) {
-        cur_x = wall[i].first / A.column;
-        neighbor_x = wall[i].second / A.column;
-        cur_y = wall[i].first % A.column;
-        neighbor_y = wall[i].second % A.column;
+    for (auto & i : wall) {
+        cur_x = i.first / A.column;
+        neighbor_x = i.second / A.column;
+        cur_y = i.first % A.column;
+        neighbor_y = i.second % A.column;
         if (cur_x > neighbor_x) {  //UP
             A.map[cur_x][cur_y]._up = true;
             A.map[neighbor_x][cur_y]._down = true;

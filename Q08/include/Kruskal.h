@@ -50,7 +50,6 @@ class Kruskal {
 private:
     //std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> min_heap;  //小顶堆
     MinHeap<Edge> minHeap;
-
     int find(int x);                                                      // find函数
     bool judge();                                                         //判断是否存在最小生成树
     int *father;                                                          //并查集

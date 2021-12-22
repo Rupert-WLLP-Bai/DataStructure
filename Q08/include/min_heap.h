@@ -20,10 +20,7 @@ template<typename T>
 class MinHeap {
 public:
     MinHeap();
-
     ~MinHeap();
-
-public:
     bool insert(T val);                     //往二叉堆中插入元素
     bool remove(T data);                    //移除元素
     T getTop();                             //获取堆顶元素
@@ -34,7 +31,6 @@ private:
     int capacity;  //容量，也即是数组的大小
     int size;      //堆小小，也即是数组中有效元素的个数
     T *heap;       //底层的数组
-private:
     void filterUp(int index);             //从index所在节点，往根节点调整堆
     void filterDown(int current, int end);  //从begin所在节点开始，向end方向调整堆
 };

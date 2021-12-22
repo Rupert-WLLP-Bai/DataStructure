@@ -11,7 +11,7 @@ void first_input(binary_search_tree<int>& tree) {
         print_menu();
         int choice = fetch_choice();
         if (choice == QUIT) {
-            //cout << "Exit in first input" << endl;
+            //cout << "Exit in first input_expression" << endl;
             cout << "EXIT" << endl;
             tree.destory();
             exit(0);

@@ -53,7 +53,7 @@ bool get_input(int& ret, int min, int max, const char* prompt = "", const int ca
         if (cin.fail() || ret < min || ret > max) {
             cin.clear();
             cin.ignore(65536, '\n');
-            cout << "Error input" << endl;
+            cout << "Error input_expression" << endl;
         } else
             return true;  //操作
     }

@@ -4,7 +4,7 @@
 #include <cmath>
 #include <iomanip>
 #include <iostream>
-#include <stack>
+#include "LinkedStack.h"
 #include <vector>
 //#include "backtrace.h"
 using namespace std;
@@ -58,7 +58,7 @@ class maze {
     int row{};                                                              //行数
     int column{};                                                           //列数
     vector<vector<Node>> map;                                             //存放二维的节点图
-    stack<Node> L;                                                        //记录路径
+    LinkedStack<Node> L;                                                        //记录路径
     bool search_neighbors(Node node);                                        //搜索邻接节点
     void break_the_wall(Node A, int direcion);                            //拆墙
     void init(int R, int C) {
@@ -141,7 +141,7 @@ void maze::print_node_all() {
         for (int j = 0; j < column; j++) {  //输出第一行
             Line = map[i];                  //获取第i行的节点数据
             cout << "██";                   //输出左上角一格墙
-            if (Line[j]._up == false)
+            if (!Line[j]._up)
                 cout << "███";  //输出节点上方的墙
             else {
                 cout << "   ";  //否则不输出墙
@@ -151,7 +151,7 @@ void maze::print_node_all() {
         cout << "██";                       //输出第二行最左边的墙
         for (int j = 0; j < column; j++) {  //输出第二行（包含左右墙和数字）
 
-            if (Line[j]._right == false) {
+            if (!Line[j]._right) {
                 if (printnumber)
                     cout << hex << setw(3) << ID++;  //输出数字
                 else

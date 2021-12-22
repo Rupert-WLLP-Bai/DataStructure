@@ -15,13 +15,13 @@ using namespace std;
 void Solution::test() {
     int num_of_nodes;
     int num_of_edges;
-    cout << "输入顶点数和边数: ";
+    cout << "输入电网的顶点数和边数: ";
     while (true) {
         cin >> num_of_nodes >> num_of_edges;
         if (cin.fail()) {
             cin.clear();
             cin.ignore(0xffff, '\n');
-            cerr << "Bad input" << endl;
+            cerr << "Bad input_expression" << endl;
             continue;
         }
         break;

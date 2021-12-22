@@ -40,19 +40,7 @@ Kruskal::~Kruskal() {
  */
 void Kruskal::calculate_min_value() {
     int num = 0;
-//    while (!min_heap.empty() && num != num_of_nodes - 1) {
-//        Edge temp = min_heap.top();
-//        min_heap.pop();
-//        int father_x = find(temp.from);
-//        int father_y = find(temp.to);
-//        if (father_x != father_y) {
-//            father[father_y] = find(father[father_x]);
-//            cout << temp.from << " --> " << temp.to << " = " << temp.cost << endl;
-//            min_value += temp.cost;
-//            num++;
-//        }
-//    }
-    while (minHeap.getSize()!=0 && num != num_of_nodes - 1) {
+    while (minHeap.getSize() != 0 && num != num_of_nodes - 1) {
         Edge temp = minHeap.getTop();
         minHeap.remove(minHeap.getTop());
         int father_x = find(temp.from);
@@ -109,12 +97,12 @@ void Kruskal::input_data() {
         int to;
         int cost;
         while (true) {
-            cout << "依次输入第" << i+1 << "条边的参数(起始顶点、终止顶点、权值)" << endl;
+            cout << "依次输入第" << i + 1 << "条边的参数(起始顶点、终止顶点、权值)" << endl;
             cin >> from >> to >> cost;
             if (cin.fail()) {
                 cin.clear();
                 cin.ignore(0xffff, '\n');
-                cerr << "Bad input" << endl;
+                cerr << "Bad input_expression" << endl;
                 continue;
             }
             break;
