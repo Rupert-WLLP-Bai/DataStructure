@@ -17,13 +17,13 @@ v1.0.0 2021年10月22日11:20:33
 using namespace std;
 
 void get_input(int& ret, int min, int max, const char* prompt = "") {
-    while (1) {
+    while (true) {
         cout << prompt;
         cin >> ret;
         if (cin.fail() || ret < min || ret > max) {
             cin.clear();
             cin.ignore(65536, '\n');
-            cout << "Error input" << endl;
+            cout << "Error input_expression" << endl;
         } else
             break;
     }

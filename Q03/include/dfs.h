@@ -4,18 +4,19 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
-#include <stack>
+#include "LinkedStack.h"
 #include <vector>
+#include "deque"
 #include "maze.h"
 using namespace std;
 
 class dfs {
    public:
-    void get_choice(int* choice, int current, maze A);
-    bool search_neighbors(int* neighbor_visited, int current, maze A, vector<int> visited);
-    void generate(maze& A) {  //生成迷宫
+    static void get_choice(int* choice, int current, maze A);
+    static bool search_neighbors(int* choice, int current, const maze& A, vector<int> visited);
+    static void generate(maze& A) {  //生成迷宫
         //const char* F[] = {"上", "下", "左", "右"};
-        srand((unsigned int)time(NULL));
+        srand((unsigned int)time(nullptr));
         A.L.push(A.start);                              //起始位置入栈
         A.map[A.start._x][A.start._y]._visited = true;  //起点标记为已被访问
         int current_x, current_y;                       //现在节点所在的位置
@@ -25,7 +26,7 @@ class dfs {
         while (A.L.top() != A.end) {                                 //未走到终点 搜索邻接节点
             if (!A.search_neighbors(A.map[current_x][current_y])) {  //邻接节点有未被访问的节点
                 int direction;                                       //方向
-                while (1) {
+                while (true) {
                     int _x, _y;  //横坐标，纵坐标
                     _x = current_x;
                     _y = current_y;
@@ -40,7 +41,7 @@ class dfs {
                         _y++;
                     if (_x < 0 || _x > A.row - 1 || _y < 0 || _y > A.column - 1)  //超限
                         continue;
-                    if (A.map[_x][_y]._visited == false)
+                    if (!A.map[_x][_y]._visited)
                         break;
                 }
                 //cout << "direction = " << F[direction] << endl;
@@ -77,7 +78,7 @@ void dfs::get_choice(int* choice, int current, maze A) {
     choice[3] = L._right;
 }
 void dfs::solve(maze A) {
-    srand((unsigned int)time(NULL));
+    srand((unsigned int)time(nullptr));
     vector<int> visited;  //记录已经访问的点
     int choice[4];
     int direction;
@@ -129,20 +130,20 @@ void dfs::solve(maze A) {
     // output << "END" << endl;
 
     cout << "尝试路径" << endl;
-    while (way.size()) {
+    while (!way.empty()) {
         cout << hex << way.front() << " -> ";
         way.pop_front();
     }
     cout << "终点" << endl;
     cout << "--------------------------------" << endl;
     cout << "迷宫的解" << endl;
-    while (solution.size()) {
+    while (!solution.empty()) {
         cout << hex << solution.front() << " -> ";
         solution.pop_front();
     }
     cout << "终点" << endl;
 }
-bool dfs::search_neighbors(int* choice, int current, maze A, std::vector<int> visited) {
+bool dfs::search_neighbors(int* choice, int current, const maze& A, std::vector<int> visited) {
     int cur = current;
     if (choice[0]) {  //UP
         cur -= A.column;
@@ -180,7 +181,7 @@ bool dfs::search_neighbors(int* choice, int current, maze A, std::vector<int> vi
 }
 void dfs::print_results(maze A) {
     int ID = 0;
-    const int printnumber = 0;
+    const int print_number = 0;
     // int max_digit = int(log10(row * column)) + 1;
     vector<Node> Line;  //一行的节点内容
     //cout << "Print_Node_All" << endl;
@@ -189,7 +190,7 @@ void dfs::print_results(maze A) {
         for (int j = 0; j < A.column; j++) {  //输出第一行
             Line = A.map[i];                  //获取第i行的节点数据
             cout << "██";                     //输出左上角一格墙
-            if (Line[j]._up == false)
+            if (!Line[j]._up)
                 cout << "███";  //输出节点上方的墙
             else {
                 cout << "\033[34m"
@@ -201,14 +202,14 @@ void dfs::print_results(maze A) {
         cout << "██";                         //输出第二行最左边的墙
         for (int j = 0; j < A.column; j++) {  //输出第二行（包含左右墙和数字）
 
-            if (Line[j]._right == false) {
-                if (printnumber)
+            if (!Line[j]._right) {
+                if (print_number)
                     cout << hex << setw(3) << ID++;  //输出数字
                 else
                     cout << "   ";
                 cout << "██";  //输出节点右边的墙
             } else {
-                if (printnumber)
+                if (print_number)
                     cout << hex << setw(3) << ID++;  //输出数字
                 else
                     cout << "   ";

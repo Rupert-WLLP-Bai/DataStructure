@@ -10,7 +10,7 @@
 update notes:
 
 v1.0.0 2021年9月19日17:55:52
-    TODO in v1.0.1:
+     in v1.0.1:
         1. 根据最长的名字调整输出的长度以及表头标题之间的距离，名字超过10个汉字的长度只显示前五个和后五个字符中间用..连接
         2. 注释的位置放在某一行的上一行(***改掉行尾注释)
 */
@@ -18,6 +18,7 @@ v1.0.0 2021年9月19日17:55:52
 #include <iomanip>
 #include <iostream>
 #include <string>
+#include <utility>
 #include "list_linked.h"
 using namespace std;
 
@@ -31,10 +32,10 @@ class Student {
    public:
     Student() { age = -1; };
     Student(string ID, string NAME, string GENDER, int AGE, string CATEGORY) {
-        id = ID;
-        name = NAME;
-        gender = GENDER;
-        category = CATEGORY;
+        id = std::move(ID);
+        name = std::move(NAME);
+        gender = std::move(GENDER);
+        category = std::move(CATEGORY);
         age = AGE;
     }
     Student(Student& s1) {
@@ -44,7 +45,7 @@ class Student {
         category = s1.category;
         age = s1.age;
     }
-    ~Student(){};
+    ~Student()= default;
     friend ostream& operator<<(ostream& out, Student& Stu);  //重载输出
     friend istream& operator>>(istream& in, Student& Stu);   //重载输入
     bool operator==(Student& s1);                            //重载==

@@ -6,19 +6,16 @@
 */
 
 #pragma once
-#include <vector>
 #include <fstream>
 #include <iostream>
 #include "trie.h"
 using namespace std;
 
 //DEFINITION OF EXCEPTION
-#define OPEN_FAILED 1
 
 
 void input(string& filename, string& route);
 void input_key(string& key);
-void display_src(string route);
-void read_file(trie<26, IndexClass>& t, string route);
+void display_src(const string& route);
+void read_file(trie<26, IndexClass>& t, const string& route);
 void solution();
-string random_gen(int64_t n);

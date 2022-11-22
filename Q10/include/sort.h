@@ -10,45 +10,45 @@
 update notes:
 
 v1.0.0 2021年10月26日16:35:17
-    TODO in v1.0.1
+      in v1.0.1
         1. rand的范围在Windows和Linux下不同
 */
 
 #ifdef _WIN32
-#include "stop_watch.h"  //Windows计时器
+    #include "stop_watch.h"  //Windows计时器
 #endif
 
-#include <algorithm>
 #include <cmath>
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
+#include <random>
 
 //排序函数
 namespace sort_laobai {
-void swap(int& a, int& b);                                             //交换
-void assign(int* num, int* _arr, int N);                               //赋值
-void Bubble_sort(int* _arr);                                           //冒泡排序
-void Selection_sort(int* _arr);                                        //选择排序
-void Insertion_sort(int* _arr);                                        //插入排序
-void Shell_sort(int* _arr);                                            //希尔排序
-void Quick_sort(int* _arr);                                            //快速排序(还可以优化)
-void Heap_sort(int* _arr);                                             //堆排序
-void Merge_sort(int* _arr);                                            //归并排序(二路归并) (可加入n路归并)
-void Radix_sort(int* _arr);                                            //基数排序
-int64_t Shell_insert(int* arr, int begin, int gap, int N);             //希尔排序插入
-int64_t Q_Sort(int left, int right, int* arr);                         //快速排序递归
-int64_t adjustHeap(int* arr, int i, int n);                            //调整堆函数
-void MergeSort(int* A, int n, int64_t& count);                         //归并排序
-int64_t Merge(int* A, int* L, int leftCount, int* R, int rightCount);  //归并
-int max_bit(int* arr, int N);                                          //基数排序求最大位数
-void radixsort(int* data, int n);                                      //基数排序实现
+    void swap(int &a, int &b);                                             //交换
+    void assign(const int *num, int *_arr, int N);                               //赋值
+    void Bubble_sort(int *_arr);                                           //冒泡排序
+    void Selection_sort(int *_arr);                                        //选择排序
+    void Insertion_sort(int *_arr);                                        //插入排序
+    void Shell_sort(int *_arr);                                            //希尔排序
+    void Quick_sort(int *_arr);                                            //快速排序(还可以优化)
+    void Heap_sort(int *_arr);                                             //堆排序
+    void Merge_sort(int *_arr);                                            //归并排序(二路归并) (可加入n路归并)
+    void Radix_sort(int *_arr);                                            //基数排序
+    int64_t Shell_insert(int *arr, int begin, int gap, int N);             //希尔排序插入
+    int64_t Q_Sort(int left, int right, int *arr);                         //快速排序递归
+    int64_t adjustHeap(int *arr, int i, int n);                            //调整堆函数
+    void MergeSort(int *A, int n, int64_t &count);                         //归并排序
+    int64_t Merge(int *A, const int *L, int leftCount, const int *R, int rightCount);  //归并
+    int max_bit(const int *arr, int N);                                          //基数排序求最大位数
+    void radixSort(int *data, int n);                                      //基数排序实现
 }  // namespace sort_laobai
 
 //测试函数
 namespace test_sort {
-void print_arr(int* arr);                   //输出一个*arr,范围决定格式化输出
-void generate(int* arr, int n, int range);  //生成随机的*arr,数量为n,范围为0~range-1
+    void print_arr(int *arr);                   //输出一个*arr,范围决定格式化输出
+    void generate(int *arr, int n, int range);  //生成随机的*arr,数量为n,范围为0~range-1
 
 }  // namespace test_sort
 
@@ -56,10 +56,10 @@ using namespace std;
 using namespace test_sort;
 
 //输出arr
-void test_sort::print_arr(int* arr) {
+void test_sort::print_arr(int *arr) {
     using namespace sort_laobai;
     //算出*arr中N的值
-    int* p = arr;
+    int *p = arr;
     int N = 0;
     while (*p != -1) {
         N++;
@@ -75,11 +75,13 @@ void test_sort::print_arr(int* arr) {
     }
     cout << endl;
 }
+
 //随机生成(Windows下的RAND_MAX和Linux下不同)
-void test_sort::generate(int* arr, int n, int range) {
-    srand((unsigned int)time(NULL));
+void test_sort::generate(int *arr, int n, int range) {
+    uniform_int_distribution<unsigned int> uniformIntDistribution(0,range);
+    default_random_engine defaultRandomEngine(static_cast<unsigned int>(time(nullptr)));
     for (int i = 0; i < n; i++) {
-        arr[i] = rand() % range;
+        arr[i] = static_cast<int>(uniformIntDistribution(defaultRandomEngine));
     }
     arr[n] = -1;
     if (n < 100)
@@ -88,13 +90,14 @@ void test_sort::generate(int* arr, int n, int range) {
 
 //namespace sort_laobai的实现 只考虑整数的s实现
 //交换
-void sort_laobai::swap(int& a, int& b) {
+void sort_laobai::swap(int &a, int &b) {
     int temp = a;
     a = b;
     b = temp;
 }
+
 //赋值
-void sort_laobai::assign(int* num, int* arr, int N) {
+void sort_laobai::assign(const int *num, int *arr, int N) {
     for (int i = 0; i < N; i++) {
         arr[i] = num[i];
     }
@@ -103,9 +106,9 @@ void sort_laobai::assign(int* num, int* arr, int N) {
 //八种排序(10种)
 
 //1.冒泡排序
-void sort_laobai::Bubble_sort(int* _arr) {
+void sort_laobai::Bubble_sort(int *_arr) {
     //算出*arr中N的值
-    int* p = _arr;
+    int *p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
@@ -114,7 +117,7 @@ void sort_laobai::Bubble_sort(int* _arr) {
     //计数
     int64_t count = 0;
     //申请
-    int* arr = new int[N];
+    int *arr = new int[N];
     //赋值
     sort_laobai::assign(_arr, arr, N);
 //计时开始
@@ -157,9 +160,9 @@ void sort_laobai::Bubble_sort(int* _arr) {
 }
 
 //2.选择排序
-void sort_laobai::Selection_sort(int* _arr) {
+void sort_laobai::Selection_sort(int *_arr) {
     //算出*arr中N的值
-    int* p = _arr;
+    int *p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
@@ -168,7 +171,7 @@ void sort_laobai::Selection_sort(int* _arr) {
     //计数
     int64_t count = 0;
     //申请
-    int* arr = new int[N];
+    int *arr = new int[N];
     //赋值
     sort_laobai::assign(_arr, arr, N);
 //计时开始
@@ -216,10 +219,11 @@ void sort_laobai::Selection_sort(int* _arr) {
     //释放
     delete[] arr;
 }
+
 //3.直接插入排序
-void sort_laobai::Insertion_sort(int* _arr) {
+void sort_laobai::Insertion_sort(int *_arr) {
     //算出*arr中N的值
-    int* p = _arr;
+    int *p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
@@ -228,7 +232,7 @@ void sort_laobai::Insertion_sort(int* _arr) {
     //计数
     int64_t count = 0;
     //申请
-    int* arr = new int[N];
+    int *arr = new int[N];
     //赋值
     sort_laobai::assign(_arr, arr, N);
 //计时开始
@@ -272,9 +276,9 @@ void sort_laobai::Insertion_sort(int* _arr) {
 }
 
 //4.希尔排序
-void sort_laobai::Shell_sort(int* _arr) {
+void sort_laobai::Shell_sort(int *_arr) {
     //算出*arr中N的值
-    int* p = _arr;
+    int *p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
@@ -283,7 +287,7 @@ void sort_laobai::Shell_sort(int* _arr) {
     //计数
     int64_t count = 0;
     //申请
-    int* arr = new int[N];
+    int *arr = new int[N];
     //赋值
     sort_laobai::assign(_arr, arr, N);
 //计时开始
@@ -325,8 +329,9 @@ void sort_laobai::Shell_sort(int* _arr) {
     //释放
     delete[] arr;
 }
+
 //4.希尔排序的插入(返回值为count的增量)
-int64_t sort_laobai::Shell_insert(int* arr, int begin, int gap, int N) {
+int64_t sort_laobai::Shell_insert(int *arr, int begin, int gap, int N) {
     int64_t count = 0;
     for (int i = begin + gap; i < N; i += gap) {
         int temp = arr[i];
@@ -341,18 +346,18 @@ int64_t sort_laobai::Shell_insert(int* arr, int begin, int gap, int N) {
 }
 
 //5.快速排序
-void sort_laobai::Quick_sort(int* _arr) {
+void sort_laobai::Quick_sort(int *_arr) {
     //算出*arr中N的值
-    int* p = _arr;
+    int *p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
         p++;
     }
     //计数
-    int64_t count = 0;
+    int64_t count;
     //申请
-    int* arr = new int[N];
+    int *arr = new int[N];
     //赋值
     sort_laobai::assign(_arr, arr, N);
 //计时开始
@@ -386,8 +391,9 @@ void sort_laobai::Quick_sort(int* _arr) {
     //释放
     delete[] arr;
 }
+
 //5.快速排序递归
-int64_t sort_laobai::Q_Sort(int left, int right, int* arr) {
+int64_t sort_laobai::Q_Sort(int left, int right, int *arr) {
     static int64_t count = 0;
     if (left >= right)
         return 0;
@@ -413,9 +419,9 @@ int64_t sort_laobai::Q_Sort(int left, int right, int* arr) {
 }
 
 //6.堆排序
-void sort_laobai::Heap_sort(int* _arr) {
+void sort_laobai::Heap_sort(int *_arr) {
     //算出*arr中N的值
-    int* p = _arr;
+    int *p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
@@ -424,7 +430,7 @@ void sort_laobai::Heap_sort(int* _arr) {
     //计数
     int64_t count = 0;
     //申请
-    int* arr = new int[N];
+    int *arr = new int[N];
     //赋值
     sort_laobai::assign(_arr, arr, N);
 //计时开始
@@ -465,8 +471,9 @@ void sort_laobai::Heap_sort(int* _arr) {
     //释放
     delete[] arr;
 }
+
 //6.调整堆
-int64_t sort_laobai::adjustHeap(int* arr, int i, int n) {
+int64_t sort_laobai::adjustHeap(int *arr, int i, int n) {
     int64_t count = 0;
     int parent = i;         // 父节点下标
     int child = 2 * i + 1;  // 子节点下标
@@ -485,9 +492,9 @@ int64_t sort_laobai::adjustHeap(int* arr, int i, int n) {
 }
 
 //7.二路归并排序
-void sort_laobai::Merge_sort(int* _arr) {
+void sort_laobai::Merge_sort(int *_arr) {
     //算出*arr中N的值
-    int* p = _arr;
+    int *p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
@@ -496,7 +503,7 @@ void sort_laobai::Merge_sort(int* _arr) {
     //计数
     int64_t count = 0;
     //申请
-    int* arr = new int[N];
+    int *arr = new int[N];
     //赋值
     sort_laobai::assign(_arr, arr, N);
 //计时开始
@@ -530,13 +537,11 @@ void sort_laobai::Merge_sort(int* _arr) {
     //释放
     delete[] arr;
 }
+
 //合并
-int64_t sort_laobai::Merge(int* A, int* L, int leftCount, int* R, int rightCount) {
+int64_t sort_laobai::Merge(int *A, const int *L, int leftCount, const int *R, int rightCount) {
     int i, j, k;
     int64_t count = 0;
-    // i - to mark the index of left aubarray (L)
-    // j - to mark the index of right sub-raay (R)
-    // k - to mark the index of merged subarray (A)
     i = 0;
     j = 0;
     k = 0;
@@ -555,26 +560,23 @@ int64_t sort_laobai::Merge(int* A, int* L, int leftCount, int* R, int rightCount
     }
     return count;
 }
+
 // Recursive function to sort an array of integers.
-void sort_laobai::MergeSort(int* A, int n, int64_t& count) {
-    int mid, i, *L, *R;
+void sort_laobai::MergeSort(int *A, int n, int64_t &count) {
+    int mid, i;
     if (n < 2)
-        return;  // base condition. If the array has less than two element, do nothing.
+        return;
 
-    mid = n / 2;  // find the mid index.
-
-    // create left and right subarrays
-    // mid elements (from index 0 till mid-1) should be part of left sub-array
-    // and (n-mid) elements (from mid to n-1) will be part of right sub-array
-    L = new int[mid];
-    R = new int[n - mid];
+    mid = n / 2;
+    int* L = new int[mid];
+    int* R = new int[n - mid];
 
     for (i = 0; i < mid; i++)
         L[i] = A[i];  // creating left subarray
     for (i = mid; i < n; i++)
         R[i - mid] = A[i];  // creating right subarray
 
-    MergeSort(L, mid, count);               // sorting the left subarray
+    MergeSort(L, mid, count) ;               // sorting the left subarray
     MergeSort(R, n - mid, count);           // sorting the right subarray
     count += Merge(A, L, mid, R, n - mid);  // Merging L and R into A as sorted list.
     // the delete operations is very important
@@ -583,9 +585,9 @@ void sort_laobai::MergeSort(int* A, int n, int64_t& count) {
 }
 
 //8.基数排序
-void sort_laobai::Radix_sort(int* _arr) {
+void sort_laobai::Radix_sort(int *_arr) {
     //算出*arr中N的值
-    int* p = _arr;
+    int *p = _arr;
     int N = 0;
     while (*p != -1) {
         N++;
@@ -594,7 +596,7 @@ void sort_laobai::Radix_sort(int* _arr) {
     //计数
     int64_t count = 0;
     //申请
-    int* arr = new int[N];
+    int *arr = new int[N];
     //赋值
     sort_laobai::assign(_arr, arr, N);
 //计时开始
@@ -606,7 +608,7 @@ void sort_laobai::Radix_sort(int* _arr) {
     clock_gettime(CLOCK_MONOTONIC, &t1);
 #endif
     //排序
-    radixsort(arr, N);
+    radixSort(arr, N);
     //计时结束
 #ifdef _WIN32
     T.stop();
@@ -628,11 +630,12 @@ void sort_laobai::Radix_sort(int* _arr) {
     //释放
     delete[] arr;
 }
+
 //基数排序
-void sort_laobai::radixsort(int* data, int n) {
+void sort_laobai::radixSort(int *data, int n) {
     int d = max_bit(data, n);
-    int* tmp = new int[n];
-    int* count = new int[10];  //计数器
+    int *tmp = new int[n];
+    int *count = new int[10];  //计数器
     int i, j, k;
     int radix = 1;
     for (i = 1; i <= d; i++)  //进行d次排序
@@ -658,10 +661,11 @@ void sort_laobai::radixsort(int* data, int n) {
     delete[] tmp;
     delete[] count;
 }
+
 //8.基数排序求最大位数
-int sort_laobai::max_bit(int* arr, int N) {
+int sort_laobai::max_bit(const int *arr, int N) {
     int max = arr[0];
-    int bit = 0;
+    int bit;
     for (int i = 0; i < N; i++) {
         if (arr[i] > max)
             max = arr[i];

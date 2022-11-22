@@ -1,10 +1,10 @@
 //maze.h 迷宫
 #pragma once
-#include <stdlib.h>
+#include <cstdlib>
 #include <cmath>
 #include <iomanip>
 #include <iostream>
-#include <stack>
+#include "LinkedStack.h"
 #include <vector>
 //#include "backtrace.h"
 using namespace std;
@@ -14,7 +14,7 @@ class Node {
     int _x, _y;                      //横坐标，纵坐标
     bool _visited;                   //是否被访问
     bool _up, _down, _left, _right;  //上下左右的墙
-    Node(int x = 0, int y = 0, bool visited = false, bool up = false, bool down = false, bool left = false, bool right = false) {
+    explicit Node(int x = 0, int y = 0, bool visited = false, bool up = false, bool down = false, bool left = false, bool right = false) {
         _x = x;
         _y = y;
         _visited = visited;
@@ -31,13 +31,13 @@ Node operator+(const Node& A, const Node& B) {
     Node node;
     node._x = A._x + B._x;
     node._y = A._y + B._y;
-    node._visited = 0;
-    node._up = 1;
-    node._down = 1;
-    node._left = 1;
-    node._right = 1;
+    node._visited = false;
+    node._up = true;
+    node._down = true;
+    node._left = true;
+    node._right = true;
     return node;
-};
+}
 bool operator==(const Node& A, const Node& B) {
     if (A._x == B._x && A._y == B._y)
         return true;
@@ -55,11 +55,11 @@ class maze {
     Node start;                                                           //入口
     Node end;                                                             //出口
     Node offset[4] = {Node(-1, 0), Node(1, 0), Node(0, -1), Node(0, 1)};  //偏移量 分别是上下左右
-    int row;                                                              //行数
-    int column;                                                           //列数
+    int row{};                                                              //行数
+    int column{};                                                           //列数
     vector<vector<Node>> map;                                             //存放二维的节点图
-    stack<Node> L;                                                        //记录路径
-    bool search_neighbors(Node A);                                        //搜索邻接节点
+    LinkedStack<Node> L;                                                        //记录路径
+    bool search_neighbors(Node node);                                        //搜索邻接节点
     void break_the_wall(Node A, int direcion);                            //拆墙
     void init(int R, int C) {
         row = R;             //行数
@@ -71,15 +71,15 @@ class maze {
         for (int i = 0; i < row; i++) {
             temp.clear();  //用完一次清空
             for (int j = 0; j < column; j++) {
-                temp.push_back(Node(i, j));  //节点按行填入
+                temp.emplace_back(i, j);  //节点按行填入
             }
             map.push_back(temp);  //插入一行
         }
     }
 
    public:
-    maze(int R = 10, int C = 10) { init(R, C); };
-    ~maze(){};
+    explicit maze(int R = 10, int C = 10) { init(R, C); };
+    ~maze()= default;
     void print_node_position();  //输出坐标位置
     void print_node_num();       //输出序号
     void print_node_all();       //打印所有信息(先存取一行的内容再打印)
@@ -141,7 +141,7 @@ void maze::print_node_all() {
         for (int j = 0; j < column; j++) {  //输出第一行
             Line = map[i];                  //获取第i行的节点数据
             cout << "██";                   //输出左上角一格墙
-            if (Line[j]._up == false)
+            if (!Line[j]._up)
                 cout << "███";  //输出节点上方的墙
             else {
                 cout << "   ";  //否则不输出墙
@@ -151,7 +151,7 @@ void maze::print_node_all() {
         cout << "██";                       //输出第二行最左边的墙
         for (int j = 0; j < column; j++) {  //输出第二行（包含左右墙和数字）
 
-            if (Line[j]._right == false) {
+            if (!Line[j]._right) {
                 if (printnumber)
                     cout << hex << setw(3) << ID++;  //输出数字
                 else

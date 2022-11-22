@@ -10,33 +10,37 @@
 update notes:
 
 v1.0.0 2021年9月29日17:55:52
-    TODO in v1.0.1:
+      in v1.0.1:
         1. 加入递归解法
 
 v1.0.1 2021年10月25日22:27:39
-    TODO in v1.0.2:
+      in v1.0.2:
         1. 加入多线程解法(在Java下已实现)
 */
 
 #pragma once
+
 #include <cmath>
 #include <iomanip>
 #include <iomanip>
 #include <iostream>
+
 using namespace std;
 
 class N_Queen {
-   private:
+private:
     int max;                      //最大行列数
-    int* array;                   //存放皇后放置列数的数组
+    int *array;                   //存放皇后放置列数的数组
     bool judge(int n);            //判断放置位置是否合理
     void solve_Recursive(int n);  //递归解法(Private)
-   public:
-    N_Queen(int max);
+public:
+    explicit N_Queen(int max);
+
     ~N_Queen();
+
     void solve_Recursive();       //递归解法
     void solve_noRecursive();     //非递归解法
-    void solve_Multithreading();  //多线程解法
+    static void solve_Multithreading();  //多线程解法
 };
 
 N_Queen::N_Queen(int max) {
@@ -69,13 +73,13 @@ inline void N_Queen::solve_Recursive(int N) {
         if (judge(N)) {
             /*到达最后一层，输出结果*/
             if (N == max - 1) {
-                cout << "Case " << setw(10) << ++count<<"  ";
+                cout << "Case " << setw(10) << ++count << "  ";
                 /*打印情况*/
-                for (int i = 0; i < max; ++i)
-                    cout << setw(2) << array[i] + 1<<" ";
+                for (int j = 0; j < max; ++j)
+                    cout << setw(2) << array[j] + 1 << " ";
                 cout << endl;
             }
-            /*未到达最后一层，向下搜索*/
+                /*未到达最后一层，向下搜索*/
             else {
                 solve_Recursive(N + 1);
             }
@@ -83,10 +87,12 @@ inline void N_Queen::solve_Recursive(int N) {
         array[N] = -1;
     }
 }
+
 //递归解法(Public)
 inline void N_Queen::solve_Recursive() {
     solve_Recursive(0);
 }
+
 //非递归解法
 inline void N_Queen::solve_noRecursive() {
     int n = max;    //max个皇后
@@ -99,9 +105,9 @@ inline void N_Queen::solve_noRecursive() {
             array[k] += 1;                     //将皇后列下移一位
         if (array[k] < n) {                    //皇后摆放位置没有到达列最底部
             if (k == (n - 1)) {                //k==n-1表示，max列皇后全部摆放完毕
-                cout << "Case " << setw(10) << ++count<<"  ";
+                cout << "Case " << setw(10) << ++count << "  ";
                 for (int i = 0; i < n; ++i)  //打印情况
-                    cout << setw(2) << array[i] + 1<<" ";
+                    cout << setw(2) << array[i] + 1 << " ";
                 cout << endl;
             } else {            //皇后还未摆放完毕
                 k += 1;         //继续摆放下一列
@@ -114,4 +120,6 @@ inline void N_Queen::solve_noRecursive() {
 
 //多线程解法
 inline void N_Queen::solve_Multithreading() {
+    //TODO 实现多线程解法
+    cout << "未实现" << endl;
 }

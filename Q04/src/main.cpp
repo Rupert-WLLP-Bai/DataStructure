@@ -9,10 +9,10 @@
 /*
 update notes:
 v1.0.0 2021年10月10日10:20:39
-	TODO in v1.0.1:
+	  in v1.0.1:
 		1. 加入递归解法，之后修改菜单
 v1.0.1 2021年10月25日22:27:39
-	TODO in v1.0.2:
+	  in v1.0.2:
         1. 加入多线程解法的菜单(在Java下已实现)
 */
 
@@ -60,6 +60,11 @@ int main() {
             break;
         case MULTITHREADING:
             N.solve_Multithreading();
+        default:
+            throw runtime_error("无效参数");
     }
+#ifdef _WIN32
+    system("pause");
+#endif
     return 0;
 }

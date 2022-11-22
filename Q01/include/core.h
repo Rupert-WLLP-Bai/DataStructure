@@ -10,13 +10,13 @@
 update notes:
 
 v1.0.0 2021年10月19日17:55:52
-	TODO in v1.0.1:
+	  in v1.0.1:
         1. 选项改成了enum
 	    2. 加入了一些输入提示
         3. 修改了操作前对空表的判断
         
 v1.0.1 2021年10月22日00:24:17
-    TODO in v1.0.2:
+      in v1.0.2:
         1. 输出的时候可以在开头加入序号方便查看位置
         2. 注释的位置放在某一行的上一行(***改掉行尾注释)
 
@@ -29,8 +29,6 @@ class Table {
    private:
     List<Student> L;  //保存数据的链表
    public:
-    Table(){};           //构造函数
-    ~Table(){};          //析构函数
     void Print();        //输出现有的成员(即统计功能)
     void Spawn();        //生成初始的内容
     void Insert(int i);  //插入
@@ -45,11 +43,7 @@ bool get_input(int& ret, int min, int max, const char* prompt = "", const int ca
         HIDE,
         OUTPUT
     };
-    while (1) {
-        if (HIDE) {
-            if (cancel != INT32_MIN)
-                cout << "Cancel input key : " << cancel << endl;
-        }
+    while (true) {
         cout << prompt;
         cin >> ret;
         if (ret == cancel) {
@@ -59,7 +53,7 @@ bool get_input(int& ret, int min, int max, const char* prompt = "", const int ca
         if (cin.fail() || ret < min || ret > max) {
             cin.clear();
             cin.ignore(65536, '\n');
-            cout << "Error input" << endl;
+            cout << "Error input_expression" << endl;
         } else
             return true;  //操作
     }
@@ -111,6 +105,8 @@ void fetch_choice(int& ret, Table& T) {
         case STATISTIC:
             T.Print();
             break;
+        default:
+            throw runtime_error("无效参数");
     }
 }
 
@@ -119,7 +115,7 @@ inline void Table::Spawn() {
     int num;
     cout << "首先请建立考生信息系统！" << endl;
     get_input(num, 0, INT32_MAX, "请输入考生人数：");
-    Student* stu = new Student[num];
+    auto* stu = new Student[num];
     if (num)
         cout << "请依次输入考生的考号，姓名，性别，年龄以及报考类别！" << endl;
     else {
@@ -129,7 +125,7 @@ inline void Table::Spawn() {
     for (int count = 0; count != num; count++) {
         if (count == num)
             break;
-        while (1) {
+        while (true) {
             cout << "请输入第" << count + 1 << "个考生的信息" << endl;
             cin >> stu[count];
             if (cin.fail()) {
@@ -157,7 +153,7 @@ inline void Table::Print() {
 //删除
 inline void Table::Delete(int i) {
     Student del;
-    if (L.getData(i) == NULL)
+    if (L.getData(i) == nullptr)
         cout << "当前位置(#" << i << ")无法删除，当前可选的插入位置范围是: (1 ~" << L.length() << ")" << endl
              << endl;
     else {
@@ -176,7 +172,7 @@ inline void Table::Delete(int i) {
 inline void Table::Insert(int i) {
     Student ins;
     if (i == 0) {
-        while (1) {
+        while (true) {
             cout << "输入插入的考生信息，顺序为序号，姓名，性别，年龄，报考类别：" << endl;
             cin >> ins;
             if (cin.fail()) {
@@ -188,8 +184,8 @@ inline void Table::Insert(int i) {
                 break;
             }
         }
-    } else if (L.locate(i) != NULL && i > 0) {
-        while (1) {
+    } else if (L.locate(i) != nullptr && i > 0) {
+        while (true) {
             cout << "输入插入的考生信息，顺序为序号，姓名，性别，年龄，报考类别：" << endl;
             cin >> ins;
             if (cin.fail()) {
@@ -210,7 +206,7 @@ inline void Table::Insert(int i) {
 
 //搜索
 inline void Table::Search(int i) {
-    if (L.locate(i) != NULL && i > 0) {
+    if (L.locate(i) != nullptr && i > 0) {
         cout << "第" << i << "个考生的信息为：" << endl;
         cout << setiosflags(ios::left) << setw(8) << "序号" << setw(8) << "姓名"
              << setw(8) << "性别" << setw(8) << "年龄" << setw(8) << "报考类别"
@@ -225,7 +221,7 @@ inline void Table::Search(int i) {
 
 //修改
 inline void Table::Revise(int i) {
-    if (L.locate(i) != NULL && i > 0) {
+    if (L.locate(i) != nullptr && i > 0) {
         cout << "第" << i << "个考生的信息为：" << endl;
         cout << setiosflags(ios::left) << setw(8) << "序号" << setw(8) << "姓名"
              << setw(8) << "性别" << setw(8) << "年龄" << setw(8) << "报考类别"
@@ -233,7 +229,7 @@ inline void Table::Revise(int i) {
         cout << *(L.getData(i)) << endl;
         Student del, ins;
         L.remove(i, del);  //删除
-        while (1) {
+        while (true) {
             cout << "输入修改后的考生信息，顺序为序号，姓名，性别，年龄，报考类别：" << endl;
             cin >> ins;
             if (cin.fail()) {

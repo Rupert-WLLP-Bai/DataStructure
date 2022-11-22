@@ -20,5 +20,8 @@ int main() {
     system("chcp 65001");
 #endif
     mainloop();
+#ifdef _WIN32
+    system("pause");
+#endif
     return 0;
 }

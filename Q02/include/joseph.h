@@ -10,13 +10,13 @@
 update notes:
 
 v1.0.0 2021年10月22日11:07:25
-    TODO in v1.0.1:
+      in v1.0.1:
         1. gap过大时，先取余
         2. 其他方式优化计算速度
         3. 注释的位置放在某一行的上一行(***改掉行尾注释)
 
 v1.0.1 2021年10月23日11:52:45
-    TODO in v1.0.2:
+      in v1.0.2:
         1. 初始化时改为头部插入，否则每次计算链表长度效率很低
 
 v1.0.2 2021年10月25日12:23:47
@@ -43,7 +43,7 @@ class Joseph {
             List.insert(0, i);  //初始化
         }
     }
-    ~Joseph(){};   //析构函数
+    ~Joseph()= default;   //析构函数
     void solve();  //解决Joseph问题，结果储存在List和Del中
 };
 
@@ -62,7 +62,7 @@ void Joseph::solve() {
     while (i--)                                   //定位到起始位置
         current = current->Link;
     while (count) {
-        for (int i = 0; i < gap; i++) {
+        for (int j = 0; j < gap; j++) {
             if (current == List.getHead()) {
                 current = current->Link;
                 pos = 0;

@@ -9,7 +9,6 @@
 using namespace std;
 
 int main() {
-//signal(SIGSEGV, signal_handler);
 #ifdef _WIN32
     system("chcp 65001");
 #endif
@@ -29,5 +28,8 @@ int main() {
 
     //在终端输出带颜色的路径 最后可以尝试在终端复现寻路过程(利用光标定位)
     //dfs.print_results(M);
+#ifdef _WIN32
+    system("pause");
+#endif
     return 0;
 }
